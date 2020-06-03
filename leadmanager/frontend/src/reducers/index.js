@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
-// import leads from "./leads";
+import leads from "./leads";
 
-export default combineReducers({});
+export default combineReducers({
+  leads
+});

@@ -7,3 +7,7 @@ python .\manage.py makemigrations leads
 python .\manage.py migrate
 
 npm i redux react-redux redux-thunk redux-devtools-extension
+npm i axios
+
+npm install @material-ui/core
+npm install @material-ui/icons
