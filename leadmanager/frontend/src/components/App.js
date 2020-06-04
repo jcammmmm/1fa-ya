@@ -30,11 +30,9 @@ function App(props) {
         <Grid container>
           <Header />
           <Grid item>
-            <Paper className={classes.paper}>
               <Fragment>
                 <Dashboard />
               </Fragment>
-            </Paper>
           </Grid>
         </Grid>
       </Provider>
