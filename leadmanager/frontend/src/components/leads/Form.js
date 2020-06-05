@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLead } from '../../actions/leads';
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
+
 export class Form extends Component {
   state = {
     name: '',
@@ -30,45 +34,46 @@ export class Form extends Component {
       <div className="card card-body mt-4 mb-4">
         <h2>Add Lead</h2>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              onChange={this.onChange}
-              value={name}
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              onChange={this.onChange}
-              value={email}
-            />
-          </div>
-          <div className="form-group">
-            <label>Message</label>
-            <textarea
-              className="form-control"
-              type="text"
-              name="message"
-              onChange={this.onChange}
-              value={message}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <Grid container spacing={2}>
+            <Grid item>
+              <TextField 
+                label="nombre" 
+                name="name"
+                value={name}
+                onChange={this.onChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField 
+                label="email" 
+                name="email"
+                onChange={this.onChange}
+                value={email}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="standard-multiline-static"
+                label="mensaje"
+                multiline
+                name="message"
+                onChange={this.onChange}
+                value={message}
+              />
+            </Grid>
+          </Grid>
+          <Button
+              style={{ marginTop: 16 }}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
               Submit
-            </button>
-          </div>
+          </Button>
         </form>
       </div>
     )
   }
 }
 
-export default connect(null, { addLead  })(Form);
+export default connect(null, { addLead })(Form);
