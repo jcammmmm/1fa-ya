@@ -27,14 +27,14 @@ function App(props) {
 
     return (
       <Provider store={store}>
-        <Grid container>
-          <Header />
-          <Grid item>
+          <Grid container>
+            <Header />
+          </Grid>
+          <Grid container style={{ marginTop: 50}} >
               <Fragment>
                 <Dashboard />
               </Fragment>
           </Grid>
-        </Grid>
       </Provider>
     )
 }
