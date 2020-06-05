@@ -16,7 +16,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 export class Leads extends Component {
 
   static PropTypes = {
-    leads: PropTypes.array.isRequired
+    leads: PropTypes.array.isRequired,
+    getLeads: PropTypes.func.isRequired, // goot practice
+    deleteLeads: PropTypes.func.isRequired,
   }
   
   componentDidMount() {
@@ -57,6 +59,7 @@ export class Leads extends Component {
                     startIcon={<DeleteIcon />}
                     onClick={this.props.deleteLead.bind(this, lead.id)}
                   >
+                    {" "}
                     Borra
                   </Button>
                 </TableCell>
