@@ -12,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import React from 'react';
+import TemporaryDrawer from './Drawer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +80,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Header(props) {
+function Header() {
+    const [state, setState] = React.useState({
+      showDrawer: false,
+    });
+
+    const toggleDrawer = (open) => (event) => {
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+  
+      setState({ ...state, showDrawer: open });
+    };
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -171,7 +184,7 @@ function Header(props) {
               color="inherit"
               aria-label="open drawer"
             >
-              <MenuIcon />
+              <MenuIcon onClick={toggleDrawer(true)}/>
             </IconButton>
             <Typography variant="h6" noWrap>
               1fa-ya
@@ -214,6 +227,7 @@ function Header(props) {
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
+        <TemporaryDrawer showDrawer={state.showDrawer} closeCallBack={toggleDrawer} />
       </div>
     );
 }

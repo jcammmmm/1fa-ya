@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer() {
+export default function TemporaryDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -71,8 +71,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <React.Fragment key={opt}>
-        <Button onClick={toggleDrawer(opt, true)}>{opt}</Button>
-        <Drawer anchor={opt} open={state[opt]} onClose={toggleDrawer(opt, false)}>
+        <Drawer anchor={opt} open={props.showDrawer} onClose={props.closeCallBack(false)}>
           {list(opt)}
         </Drawer>
       </React.Fragment>
