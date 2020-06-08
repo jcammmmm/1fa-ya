@@ -1,15 +1,20 @@
-import React, { Component, Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
-import Header from './layout/Header'
-import Dashboard from './leads/Dashboard'
-
+import { makeStyles } from '@material-ui/core/styles';
+import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import store from "../store";
+import Header from './layout/Header';
+import Dashboard from './leads/Dashboard';
+import Alerts from "./layout/Alerts";
+
+import TemporaryDrawer from './layout/Drawer';
+
+// Alert option
+const alertOptions = {
+  timeout: 3000,
+  position: "top center"
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +32,13 @@ function App(props) {
 
     return (
       <Provider store={store}>
-          <Grid container>
+          <Fragment>
             <Header />
-          </Grid>
-          <Grid container style={{ marginTop: 50}} >
-              <Fragment>
-                <Dashboard />
-              </Fragment>
-          </Grid>
+            <Grid container style={{ marginTop: 50}}>
+              <TemporaryDrawer />
+              <Dashboard />
+            </Grid>
+          </Fragment>
       </Provider>
     )
 }
