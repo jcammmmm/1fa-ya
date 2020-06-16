@@ -32,7 +32,7 @@ export class Form extends Component {
     const { name, email, message } = this.state
     return (
       <div className="card card-body mt-4 mb-4">
-        <h2>Add Lead</h2>
+        <h2>Add email</h2>
         <form onSubmit={this.onSubmit}>
           <Grid container spacing={2}>
             <Grid item>

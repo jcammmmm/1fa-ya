@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    outline: 'none',
   },
   title: {
     display: 'none',
@@ -183,8 +184,9 @@ function Header() {
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
+              onClick={toggleDrawer(true)}
             >
-              <MenuIcon onClick={toggleDrawer(true)}/>
+              <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
               1fa-ya

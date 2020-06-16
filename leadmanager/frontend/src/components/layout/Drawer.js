@@ -10,6 +10,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import BlurOnIcon from '@material-ui/icons/BlurOn';
+import HomeIcon from '@material-ui/icons/Home';
+
+import routes from '../../routes.js';
+import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -47,6 +52,25 @@ export default function TemporaryDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+          <ListItem button 
+                    key={"somekey"}
+                    component={NavLink}
+                    to="api/qrcodes">
+              <ListItemIcon>
+                <BlurOnIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Códigos QR"} />
+          </ListItem>
+          <ListItem button 
+                    key={"somekey2"}
+                    component={NavLink}
+                    to="/">
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Inicio"} />
+          </ListItem>
+
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
