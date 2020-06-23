@@ -1,6 +1,8 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const client = require('./client');
+
+import axios from "axios";
+
 
 class App extends React.Component {
 
@@ -10,9 +12,9 @@ class App extends React.Component {
 	}
 
 	componentDidMount() { 
-		client({method: 'GET', path: '/api/employees'}).done(response => {
-			this.setState({employees: response.entity._embedded.employees});
-		});
+    axios.get('/api/employees').then(response => {
+      this.setState({employees: response.data._embedded.employees});
+    });
 	}
 
 	render() {
