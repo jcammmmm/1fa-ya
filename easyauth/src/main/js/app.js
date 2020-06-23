@@ -1,21 +1,19 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-
-import axios from "axios";
-
+const client = require('./client')
 
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: []};
+		this.state = {employees: [], pageSize: 2};
 	}
 
 	componentDidMount() { 
-    axios.get('/api/employees').then(response => {
-      this.setState({employees: response.data._embedded.employees});
+    client({method: 'GET', path: '/api/employees'}).done(response => {
+			this.setState({employees: response.entity._embedded.employees});
     });
-	}
+  }
 
 	render() {
 		return (
