@@ -8,3 +8,8 @@
       pipenv shell
       python leadmanager/manage.py runserver
   ~~~
+
+# TODOs
+[ ] Implement another HTTP client for React.
+[ ] Break down the main app.js 
+[ ] Isolate and playaround with JS websockets, use another client.
