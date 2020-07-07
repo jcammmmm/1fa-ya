@@ -41,7 +41,7 @@ public class Employee {
 
 	private @ManyToOne Manager manager; // <1>
 
-	private Employee() {}
+	public Employee() {}
 
 	public Employee(String firstName, String lastName, String description, Manager manager) { // <2>
 		this.firstName = firstName;

@@ -47,10 +47,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-    
-		Manager aa = this.managers.save(new Manager("aa", "aa",
-    "ROLE_MANAGER"));
-
 		Manager greg = this.managers.save(new Manager("greg", "turnquist",
 							"ROLE_MANAGER"));
 		Manager oliver = this.managers.save(new Manager("oliver", "gierke",
