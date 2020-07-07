@@ -1,9 +1,12 @@
 package com.jcflorezv.unfaya.entities;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Address {
-    private String  way;        // Cll 
+public class Address implements Serializable {
+    private static final long serialVersionUID = 7956981289761781527L;
+    
+    private String way; // Cll
     private Integer main;       // 28
     private char    letter;     // C 
     private Integer intersect;  // 32
