@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Port;
@@ -20,6 +21,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.jcflorezv.unfaya.clients.PostgresqlClient;
 import com.jcflorezv.unfaya.entities.Address;
 
 public class App {
@@ -27,18 +29,22 @@ public class App {
   private final static String APP_NAME = "1fa-ya";
   private final static String ID_AUTH_ENDPOINT = "unique-id-registration";
   private final static int PORT = 8080;
-  public static void main(String... args) throws IOException, WriterException, NoSuchAlgorithmException {
+
+  public static void main(String... args) throws IOException, WriterException, NoSuchAlgorithmException, SQLException {
 
     File masterFile = new File("master-file.txt");
     BufferedWriter writer = new BufferedWriter(new FileWriter(masterFile));
+    PostgresqlClient client = new PostgresqlClient("localhost", "2345", "unfaya", "postgres", "pass");
     for (int i = 0; i < SAMPLES_QTTY; i++) {
         // BufferedImage addr = generateQRCodeImage(new Address().toString());
         // File f = new File("qr_" + i + ".png");
         // ImageIO.write(addr, "png", f);
         Address addr = new Address();
         String addrSHA = getChecksum(addr);
+        String firstPwd = "" + addrSHA.charAt(0) + addrSHA.charAt(1) + addrSHA.charAt(2) + addrSHA.charAt(3) + addrSHA.charAt(4) + addrSHA.charAt(5);
         String row = String.format("%3d \t http://%s:%d/%s/%s \t%s \n", i, APP_NAME, PORT, ID_AUTH_ENDPOINT, addrSHA, addr);
-        // writer.write(i + "\t" + "http://" + APP_NAME + ":" + PORT + "/" + ID_AUTH_ENDPOINT + "/" + addrSHA + "\t" + addr + "\n");
+        
+        client.insert(addr, addrSHA, firstPwd);
         writer.write(row);
     }
     writer.close();

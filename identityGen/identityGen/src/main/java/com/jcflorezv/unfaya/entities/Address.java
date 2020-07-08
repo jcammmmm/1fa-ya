@@ -6,13 +6,13 @@ import java.util.Random;
 public class Address implements Serializable {
     private static final long serialVersionUID = 7956981289761781527L;
     
-    private String way; // Cll
-    private Integer main;       // 28
-    private char    letter;     // C 
-    private Integer intersect;  // 32
-    private Integer position;   // 73
-    private Boolean bis;        // 
-    private Boolean sur;  
+    public String way; // Cll
+    public Integer main;       // 28
+    public char    letter;     // C 
+    public Integer intersect;  // 32
+    public Integer position;   // 73
+    public Boolean bis;        // 
+    public Boolean sur;  
 
     /**
      * Instantiates a random Address
