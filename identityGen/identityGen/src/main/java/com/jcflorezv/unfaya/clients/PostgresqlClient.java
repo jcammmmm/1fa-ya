@@ -21,7 +21,7 @@ public class PostgresqlClient {
   public void insert(Address addr, String sha, String firstPwd) throws SQLException {
     Connection c = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     Statement stmt = c.createStatement();
-    String sql = "INSERT INTO public.address (\"WAY\", \"MAIN\", \"LETTER\", \"SUB\", \"POSITION\", \"BIS\", \"SUR\", \"SHA\", \"FIRST_PWD\")" +
+    String sql = "INSERT INTO public.address (\"WAY\", \"MAIN\", \"LETTER\", \"SUB\", \"POS\", \"BIS\", \"SUR\", \"SHA\", \"FIRST_PWD\")" +
                        "VALUES('" + addr.way + "', " +
                                     addr.main + ", '" + 
                                     addr.letter + "', " +
