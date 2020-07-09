@@ -14,7 +14,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import React from 'react';
 import TemporaryDrawer from './Drawer';
 
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -229,7 +228,7 @@ function NavBar() {
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-        {/* <TemporaryDrawer showDrawer={state.showDrawer} closeCallBack={toggleDrawer} /> */}
+        <TemporaryDrawer showDrawer={state.showDrawer} closeCallBack={toggleDrawer} />
       </div>
     );
 }

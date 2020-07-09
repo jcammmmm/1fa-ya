@@ -13,7 +13,6 @@ import CreateDialog from './components/CreateDialog'
 import EmployeeList from './components/EmployeeList'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import ButtonAppBar from './components/Sample'
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -221,7 +220,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<Router>
-        <ButtonAppBar/>
+        <NavBar/>
         {/* <Route exact={true} path="/" component={NavBar} /> */}
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}

@@ -17,3 +17,6 @@
   between native and web.
   And import your Router as BrowserRouter.
   import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+- Keep care with nested npm projects. Parent dependencies might confuse
+  your dependencies in inner projects. Avoid this.
