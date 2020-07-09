@@ -5,14 +5,14 @@
 -- DROP TABLE public.address;
 
 CREATE TABLE public.address (
-	"ID" serial NOT NULL,
-	"WAY" varchar NULL,
-	"MAIN" int4 NULL,
-	"LETTER" bpchar(1) NULL,
-	"SUB" int4 NULL,
-	"POS" int4 NULL,
-	"BIS" bool NULL,
-	"SUR" bool NULL,
-	"SHA" varchar NULL,
-	"FIRST_PWD" varchar NULL
+	"id" serial NOT NULL,
+	"way" varchar NULL,
+	"main" int4 NULL,
+	"letter" bpchar(1) NULL,
+	"sub" int4 NULL,
+	"pos" int4 NULL,
+	"bis" bool NULL,
+	"sur" bool NULL,
+	"sha" varchar NULL,
+	"first_pwd" varchar NULL
 );

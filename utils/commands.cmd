@@ -15,6 +15,6 @@ npm install @material-ui/icons
 npm install react-router-dom
 
 
-docker run --rm --name postgresdb -e POSTGRES_PASSWORD=pass -p 2345:5432 postgres
+docker run -d --name postgresdb -e POSTGRES_PASSWORD=pass -p 2345:5432 postgres
 psql -U postgres --port 2345
 CREATE DATABASE unfaya;
