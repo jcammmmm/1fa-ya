@@ -1,18 +1,19 @@
 'use strict';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 const when = require('when');
 const client = require('./client');
-
 const follow = require('./follow'); // function to hop multiple links by "rel"
-
 const stompClient = require('./websocket-listener');
 
 const root = '/api';
 
 import CreateDialog from './components/CreateDialog'
 import EmployeeList from './components/EmployeeList'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import ButtonAppBar from './components/Sample'
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -82,7 +83,6 @@ class App extends React.Component {
 		});
 	}
 
-	// tag::on-create[]
 	onCreate(newEmployee) {
 		follow(client, root, ['employees']).done(response => {
 			client({
@@ -93,9 +93,7 @@ class App extends React.Component {
 			})
 		})
 	}
-	// end::on-create[]
 
-	// tag::on-update[]
 	onUpdate(employee, updatedEmployee) {
 		if(employee.entity.manager.name === this.state.loggedInManager) {
 			updatedEmployee["manager"] = employee.entity.manager;
@@ -123,9 +121,7 @@ class App extends React.Component {
 			alert("You are not authorized to update");
 		}
 	}
-	// end::on-update[]
 
-	// tag::on-delete[]
 	onDelete(employee) {
 		client({method: 'DELETE', path: employee.entity._links.self.href}
 		).done(response => {/* let the websocket handle updating the UI */},
@@ -136,7 +132,6 @@ class App extends React.Component {
 			}
 		});
 	}
-	// end::on-delete[]
 
 	onNavigate(navUri) {
 		client({
@@ -171,7 +166,6 @@ class App extends React.Component {
 		}
 	}
 
-	// tag::websocket-handlers[]
 	refreshAndGoToLastPage(message) {
 		follow(client, root, [{
 			rel: 'employees',
@@ -214,9 +208,7 @@ class App extends React.Component {
 			});
 		});
 	}
-	// end::websocket-handlers[]
 
-	// tag::register-handlers[]
 	componentDidMount() {
 		this.loadFromServer(this.state.pageSize);
 		stompClient.register([
@@ -225,12 +217,13 @@ class App extends React.Component {
 			{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
 		]);
 	}
-	// end::register-handlers[]
 
 	render() {
 		return (
-			<div>
-				<CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
+			<Router>
+        <ButtonAppBar/>
+        {/* <Route exact={true} path="/" component={NavBar} /> */}
+				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
 							  employees={this.state.employees}
 							  links={this.state.links}
@@ -240,15 +233,11 @@ class App extends React.Component {
 							  onUpdate={this.onUpdate}
 							  onDelete={this.onDelete}
 							  updatePageSize={this.updatePageSize}
-							  loggedInManager={this.state.loggedInManager}/>
-			</div>
+							  loggedInManager={this.state.loggedInManager}/> */}
+			</Router>
 		)
 	}
 }
-
-// tag::employee[]
-
-// end::employee[]
 
 ReactDOM.render(
 	<App loggedInManager={document.getElementById('managername').innerHTML } />,

@@ -47,8 +47,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-    this.managers.save(new Manager("user", "pass",
-							"ROLE_MANAGER"));
+    // this.managers.save(new Manager("user", "pass",
+		// 					"ROLE_MANAGER"));
 
 		Manager greg = this.managers.save(new Manager("greg", "turnquist",
 							"ROLE_MANAGER"));

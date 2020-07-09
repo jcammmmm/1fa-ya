@@ -11,3 +11,9 @@
 
 - If you get stuck with 'hibernate-sequence' error, create one in 
   database and you will get ready.
+
+- For react routing use 'react-router-dom' and not 'react-router'. 
+  The first one is for the web and the another is a common package
+  between native and web.
+  And import your Router as BrowserRouter.
+  import { BrowserRouter as Router, Route } from 'react-router-dom';
