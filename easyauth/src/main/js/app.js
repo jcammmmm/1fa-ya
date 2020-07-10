@@ -14,6 +14,8 @@ import EmployeeList from './components/EmployeeList'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import EasyAuthForm from './components/EasyAuthForm'
+import OTPAuth from './components/OTPAuth';
+import { Paper } from '@material-ui/core'
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -220,9 +222,12 @@ class App extends React.Component {
 
 	render() {
 		return (
+    <div>
 			<Router>
         <NavBar/>
-        <Route path="/api/qrcodes" component={EasyAuthForm} />
+        <Paper style={{marginTop: 80}}>
+          <Route path="/api/qrcodes" component={OTPAuth} />
+        </Paper>
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
 							  employees={this.state.employees}
@@ -235,6 +240,7 @@ class App extends React.Component {
 							  updatePageSize={this.updatePageSize}
 							  loggedInManager={this.state.loggedInManager}/> */}
 			</Router>
+    </div>
 		)
 	}
 }

@@ -47,22 +47,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { // <5>
-		http
-			.authorizeRequests()
-				.antMatchers("/built/**", "/main.css").permitAll()
-				.anyRequest().authenticated()
-				.and()
-			.formLogin()
-				.defaultSuccessUrl("/", true)
-				.permitAll()
-				.and()
-			.httpBasic()
-				.and()
-			.csrf().disable()
-			.logout()
-        .logoutSuccessUrl("/");
+		// http
+		// 	.authorizeRequests()
+		// 		.antMatchers("/built/**", "/main.css").permitAll()
+		// 		.anyRequest().authenticated()
+		// 		.and()
+		// 	.formLogin()
+		// 		.defaultSuccessUrl("/", true)
+		// 		.permitAll()
+		// 		.and()
+		// 	.httpBasic()
+		// 		.and()
+		// 	.csrf().disable()
+		// 	.logout()
+    //     .logoutSuccessUrl("/");
         
-    // http.httpBasic().disable();
+    http.httpBasic().disable();
 	}
 
 }
