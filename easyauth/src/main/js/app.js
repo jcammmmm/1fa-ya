@@ -13,6 +13,7 @@ import CreateDialog from './components/CreateDialog'
 import EmployeeList from './components/EmployeeList'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import EasyAuthForm from './components/EasyAuthForm'
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -221,7 +222,7 @@ class App extends React.Component {
 		return (
 			<Router>
         <NavBar/>
-        {/* <Route exact={true} path="/" component={NavBar} /> */}
+        <Route path="/api/qrcodes" component={EasyAuthForm} />
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
 							  employees={this.state.employees}
