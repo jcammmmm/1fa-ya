@@ -1,3 +1,4 @@
 {
-  "plugins": ["@babel/plugin-transform-arrow-functions"]
+  "presets": ["@babel/env", "@babel/react", "@babel/preset-flow"],
+  "plugins": ["transform-object-rest-spread", "transform-class-properties"]
 }
