@@ -35,7 +35,9 @@
     "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.0.2",
