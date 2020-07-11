@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import EasyAuthForm from './components/EasyAuthForm'
 import OTPAuth from './components/OTPAuth';
+import OTPForm from './components/OTPForm';
 import { Paper } from '@material-ui/core'
 
 // const CreateDialog = require('./components/CreateDialog.js')
@@ -226,7 +227,7 @@ class App extends React.Component {
 			<Router>
         <NavBar/>
         <Paper style={{marginTop: 80}}>
-          <Route path="/api/qrcodes" component={OTPAuth} />
+          <Route path="/" component={OTPForm} />
         </Paper>
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
