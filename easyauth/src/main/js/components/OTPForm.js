@@ -14,7 +14,12 @@ const styles = {
 class OTPForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {char0: '', char1: '', char2: '', char3: '', char4: '', char5: ''};
+    this.state = {char0: { value: '', error: false }, 
+                  char1: { value: '', error: false }, 
+                  char2: { value: '', error: false }, 
+                  char3: { value: '', error: false }, 
+                  char4: { value: '', error: false }, 
+                  char5: { value: '', error: false } };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -22,25 +27,50 @@ class OTPForm extends Component {
   onChange(event) {
     const name = event.target.name;
     const value = event.target.value;
+    const char = value.charAt(value.length - 1).toUpperCase();
+    const regex = RegExp('^([0-9]|[A-Z])$')
+    
+    let charIsValid = true;
+    
+    if(!regex.test(char))
+      charIsValid = false;
+
     this.setState({
-      [name]: value.charAt(value.length - 1).toUpperCase()
+      [name]: { value: value.charAt(value.length - 1).toUpperCase(), error: !charIsValid }
     });
+
     event.preventDefault();
   }
 
   onSubmit(event) {
     let secretCode = "";
-    for(let charx in this.state)
-      secretCode += this.state[charx];
-    
-    let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json' },
-      body: JSON.stringify({ secretCode: secretCode })
+    let isValid = true;
+    for(let charx in this.state) {
+      let charValue = this.state[charx].value;
+      secretCode += charValue;
+      if (charValue === '') {
+        alert("El código no está completo.") 
+        isValid = false;
+        break;
+      }
+
+      if (this.state[charx].error) {
+        alert("El código no es valido!")
+        isValid = false;
+        break;
+      }
     }
-    fetch('http://localhost:8080/otpAuth', requestOptions).then(response => console.log(response));
-    
-    alert('El código fue enviado!' + ' (' + secretCode +  ')');
+
+    if(isValid) {
+      let requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify({ secretCode: secretCode })
+      }
+      fetch('http://localhost:8080/otpAuth', requestOptions).then(response => console.log(response));
+      
+      alert('El código fue enviado!' + ' (' + secretCode +  ')'); 
+    }
     event.preventDefault();
   }
 
@@ -51,10 +81,11 @@ class OTPForm extends Component {
           <Grid item key={charx}>
               <TextField 
                 name={charx}
-                value={this.state[charx]}
+                value={this.state[charx].value}
                 onChange={this.onChange}
                 variant="outlined"
                 InputProps={{ classes: { input: this.props.classes.input } }}
+                error={this.state[charx].error}
               />
           </Grid>
         );
