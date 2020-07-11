@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Grid, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
@@ -7,7 +8,7 @@ const styles = {
     height: "1em",
     width: "1em",
     textAlign: "center"
-  }
+  },
 };
 
 class OTPForm extends Component {
@@ -15,15 +16,23 @@ class OTPForm extends Component {
     super(props);
     this.state = {char0: '', char1: '', char2: '', char3: '', char4: '', char5: ''};
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(value);
     this.setState({
       [name]: value.charAt(value.length - 1).toUpperCase()
     });
+    event.preventDefault();
+  }
+
+  onSubmit(event) {
+    let secretCode = "";
+    for(let charx in this.state)
+      secretCode += this.state[charx];
+    alert('El código fue enviado!' + ' (' + secretCode +  ')');
     event.preventDefault();
   }
 
@@ -44,9 +53,20 @@ class OTPForm extends Component {
     }
 
     return (
-      <Grid container spacing={1} justify="center">
-        {fields}
-      </Grid>
+      <form onSubmit={this.onSubmit}>
+        <Grid container spacing={1} justify="center" style={{ padding: '40px 0px' }} >
+          {fields}
+        </Grid>
+        <Button
+                style={{ align: 'right' }}
+                variant="contained"
+                size="small"
+                color="primary"
+                type="submit"
+              >
+                Enviar
+        </Button>
+      </form>
     );
   }
 }

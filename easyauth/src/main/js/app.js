@@ -16,7 +16,8 @@ import NavBar from './components/NavBar';
 import EasyAuthForm from './components/EasyAuthForm'
 import OTPAuth from './components/OTPAuth';
 import OTPForm from './components/OTPForm';
-import { Paper } from '@material-ui/core'
+import { Paper, Card, CardActionArea, CardContent } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -226,8 +227,14 @@ class App extends React.Component {
     <div>
 			<Router>
         <NavBar/>
-        <Paper style={{marginTop: 80}}>
-          <Route path="/" component={OTPForm} />
+        <Paper style={{marginTop: 80, height: '100%', padding: 15}}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Bienvenido!
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Por favor digita el código de 6 caracteres que enviamos en la invitación:
+                </Typography>
+                <Route path="/" component={OTPForm} />
         </Paper>
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
