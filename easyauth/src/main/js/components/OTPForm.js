@@ -32,6 +32,14 @@ class OTPForm extends Component {
     let secretCode = "";
     for(let charx in this.state)
       secretCode += this.state[charx];
+    
+    let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ secretCode: secretCode })
+    }
+    fetch('http://localhost:8080/otpAuth', requestOptions).then(response => console.log(response));
+    
     alert('El código fue enviado!' + ' (' + secretCode +  ')');
     event.preventDefault();
   }
