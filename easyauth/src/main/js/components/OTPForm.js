@@ -13,7 +13,7 @@ const styles = {
 class OTPForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {char0: '', char1: '', char2: '', char3: ''};
+    this.state = {char0: '', char1: '', char2: '', char3: '', char4: '', char5: ''};
     this.onChange = this.onChange.bind(this);
   }
 
@@ -28,45 +28,24 @@ class OTPForm extends Component {
   }
 
   render() {
-    const { char0, char1, char2, char3 } = this.state;
+    let fields = [];
+    for(let charx in this.state) {
+        fields.push(
+          <Grid item key={charx}>
+              <TextField 
+                name={charx}
+                value={this.state[charx]}
+                onChange={this.onChange}
+                variant="outlined"
+                InputProps={{ classes: { input: this.props.classes.input } }}
+              />
+          </Grid>
+        );
+    }
+
     return (
       <Grid container spacing={1} justify="center">
-        <Grid item>
-          <TextField 
-            name="char0"
-            value={char0}
-            onChange={this.onChange}
-            variant="outlined"
-            InputProps={{ classes: { input: this.props.classes.input } }}
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            name="char1"
-            value={char1}
-            onChange={this.onChange}
-            variant="outlined"
-            InputProps={{ classes: { input: this.props.classes.input } }}
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            name="char2"
-            value={char2}
-            onChange={this.onChange}
-            variant="outlined"
-            InputProps={{ classes: { input: this.props.classes.input } }}
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            name="char3"
-            value={char3}
-            onChange={this.onChange}
-            variant="outlined"
-            InputProps={{ classes: { input: this.props.classes.input } }}
-          />
-        </Grid>
+        {fields}
       </Grid>
     );
   }
