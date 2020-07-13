@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -17,16 +18,14 @@ import lombok.Setter;
 @Entity
 public class House {
   
-  @Id @GeneratedValue
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter @Setter private Long id;
   @Getter @Setter private String name;
   @Getter @Setter private String mainPhoto; // image url
   @Getter @Setter private String location;  // image url
   
-  @OneToMany(
-    cascade = CascadeType.ALL,
-    orphanRemoval = true
-  )
+  // https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "house_id")
   private List<Service> services = new ArrayList<>();
 
