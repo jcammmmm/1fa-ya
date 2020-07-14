@@ -13,11 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
 public class House {
-  
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter @Setter private Long id;
   @Getter @Setter private String name;

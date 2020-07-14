@@ -1,7 +1,6 @@
 package com.jcflorezv.unfaya.houseServices.models;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NaturalId;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,10 +42,10 @@ public class Service {
   })
   @JoinTable(
     name = "service_tag",
-    joinColumns = @JoinColumn(name = "post_id"),
+    joinColumns = @JoinColumn(name = "service_id"),
     inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
-  @Getter @Setter private Set<Tag> tags; // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
+  @Getter @Setter private Set<Tag> tags = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "service_id")
@@ -67,9 +69,31 @@ public class Service {
     this.price = (int) (rnd.nextDouble() * 10000);
     this.units = "svcunit" + rnd.nextInt(999);
     this.publishPrice = rnd.nextBoolean();
-    this.tags = new HashSet<Tag>(Arrays.asList(new Tag(), new Tag(), new Tag()));
     this.photos = Arrays.asList(new Photo(), new Photo(), new Photo());
     this.cellphones = Arrays.asList(new CellPhone(), new CellPhone(), new CellPhone());
     this.webUris = Arrays.asList(new WebURI(), new WebURI(), new WebURI());
+  }
+
+  // https://vladmihalcea.com/jpa-hibernate-synchronize-bidirectional-entity-associations/
+  public void addTag(Tag tag) {
+    tags.add(tag);
+    tag.getServices().add(this);
+  }
+
+  public void removeTag(Tag tag) {
+      tags.remove(tag);
+      tag.getServices().remove(this);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof Service)) return false;
+      return id != null && id.equals(((Service) o).getId());
+  }
+
+  @Override
+  public int hashCode() {
+      return 31;
   }
 }

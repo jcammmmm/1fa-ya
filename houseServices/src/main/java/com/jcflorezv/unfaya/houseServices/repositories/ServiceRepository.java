@@ -6,4 +6,5 @@ import org.springframework.data.repository.Repository;
 
 public interface ServiceRepository extends Repository<Service, Long> {
   Service save(Service service);
+  Service findById(Long id);
 }
