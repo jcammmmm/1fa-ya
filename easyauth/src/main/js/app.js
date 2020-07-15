@@ -1,23 +1,20 @@
 'use strict';
 
+import { Paper } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import ServiceList from './components/ServiceList';
 const when = require('when');
 const client = require('./client');
 const follow = require('./follow'); // function to hop multiple links by "rel"
 const stompClient = require('./websocket-listener');
+const axios = require('axios');
 
 const root = '/api';
 
-import CreateDialog from './components/CreateDialog'
-import EmployeeList from './components/EmployeeList'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import EasyAuthForm from './components/EasyAuthForm'
-import OTPAuth from './components/OTPAuth';
-import OTPForm from './components/OTPForm';
-import { Paper, Card, CardActionArea, CardContent } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 
 // const CreateDialog = require('./components/CreateDialog.js')
 // const EmployeeList = require('./components/EmployeeList.js')
@@ -26,7 +23,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [], attributes: [], page: 1, pageSize: 2, links: {}
+		this.state = {services: {}, employees: [], attributes: [], page: 1, pageSize: 2, links: {}
 		   , loggedInManager: this.props.loggedInManager};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
@@ -214,13 +211,21 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadFromServer(this.state.pageSize);
-		stompClient.register([
-			{route: '/topic/newEmployee', callback: this.refreshAndGoToLastPage},
-			{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
-			{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
-		]);
-	}
+		// this.loadFromServer(this.state.pageSize);
+		// stompClient.register([
+		// 	{route: '/topic/newEmployee', callback: this.refreshAndGoToLastPage},
+		// 	{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
+		// 	{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
+    // ]);
+    
+    // let serviceData = fetch("http://localhost:8080/services")
+    //                       .then(response => response.json());
+    let services = {};
+    let config = { headers: { 'Access-Control-Allow-Origin': 'https://localhost:8081' }}
+    axios.get("http://localhost:8080/services", config)
+            .then(r => { this.setState({ services: r.data._embedded.services }, () => console.log(this.state)) })
+            .catch(e => console.log(e));
+  }
 
 	render() {
 		return (
@@ -234,7 +239,8 @@ class App extends React.Component {
                 <Typography variant="body2" color="textSecondary" component="p">
                   Por favor digita el código de 6 caracteres que enviamos en la invitación:
                 </Typography>
-                <Route path="/" component={OTPForm} />
+                {/*This module is OK!! <Route path="/" component={OTPForm} /> */} 
+                <Route path="/" children={<ServiceList services={this.state.services} />} /> 
         </Paper>
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
