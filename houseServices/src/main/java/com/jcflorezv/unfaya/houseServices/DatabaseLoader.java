@@ -1,7 +1,10 @@
 package com.jcflorezv.unfaya.houseServices;
 
+import java.util.Arrays;
+
 import javax.transaction.Transactional;
 
+import com.jcflorezv.unfaya.houseServices.models.House;
 import com.jcflorezv.unfaya.houseServices.models.Service;
 import com.jcflorezv.unfaya.houseServices.models.Tag;
 import com.jcflorezv.unfaya.houseServices.repositories.HouseRepository;
@@ -26,21 +29,23 @@ public class DatabaseLoader implements CommandLineRunner {
   @Override
   @Transactional // https://stackoverflow.com/questions/40247030/detached-entity-passed-to-persist-in-spring-data
   public void run(String... args) throws Exception {
-    Service svc1 = new Service();
-    Service svc2 = new Service();
+    // Service svc1 = new Service();
+    // Service svc2 = new Service();
 
-    Tag tag1 = new Tag();
-    Tag tag2 = new Tag();
+    // Tag tag1 = new Tag();
+    // Tag tag2 = new Tag();
 
-    svc1.addTag(tag1);
-    svc1.addTag(tag2);
-    svc2.addTag(tag1);
+    // svc1.addTag(tag1);
+    // svc1.addTag(tag2);
+    // svc2.addTag(tag1);
 
-    srepo.save(svc1);
-    srepo.save(svc2);
+    // srepo.save(svc1);
+    // srepo.save(svc2);
     
 
-    /*
+    
+    Tag tag1 = new Tag();
+    Tag tag2 = new Tag();
     Tag tag3 = new Tag();
 
     Service[] svcs = new Service[9];
@@ -53,11 +58,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
     for(Service s : svcs)
       srepo.save(s);
-    */
     
-    // hrepo.save(new House(Arrays.asList(svcs[0], svcs[1], svcs[2])));
-    // hrepo.save(new House(Arrays.asList(svcs[3], svcs[4], svcs[5])));
-    // hrepo.save(new House(Arrays.asList(svcs[6], svcs[7], svcs[8])));
+    
+    hrepo.save(new House(Arrays.asList(svcs[0], svcs[1], svcs[2])));
+    hrepo.save(new House(Arrays.asList(svcs[3], svcs[4], svcs[5])));
+    hrepo.save(new House(Arrays.asList(svcs[6], svcs[7], svcs[8])));
 
     
   }

@@ -20,3 +20,17 @@
 
 - Keep care with nested npm projects. Parent dependencies might confuse
   your dependencies in inner projects. Avoid this.
+
+- If you add or remove a Repository for an entity (specifically for a
+  many-to-many relationship) the fetch made for Hibernate varies. 
+  For this project if you remove the Tag repository the returned results
+  for http://localhost:8080/services/1 are recursive for the tag 
+  entity returning also the services for each tag, making a verbose
+  result.
+  In the other hand if you add a repository with save() and findBy(id)
+  methods the returned results for 'http://localhost:8080/services/1'
+  are not recursive and less 'verbose' giving us an eficient default 
+  behavior.
+  Note that this does not relate with FetchType.LAZY
+  Even removing save() and findBy() methods the returned results
+  remain the same.

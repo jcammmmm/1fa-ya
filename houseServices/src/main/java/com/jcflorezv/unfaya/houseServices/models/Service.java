@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
@@ -27,7 +28,7 @@ public class Service {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter @Setter private Long id;
-  @Getter @Setter private String name;        // e.g. 'Corte de Cabello'
+  @Getter @Setter private String name;         // e.g. 'Corte de Cabello'
   @Getter @Setter private String description; // e.g. 'Se realizan cortes de cabello para las personas del sector...'
   @Getter @Setter private Integer avgStar;
   @Getter @Setter private Integer timesServed;
@@ -36,10 +37,16 @@ public class Service {
   @Getter @Setter private String units;
   @Getter @Setter private Boolean publishPrice;
 
+  @ManyToOne (
+    fetch = FetchType.EAGER
+  )
+  @JoinColumn(name = "house_id")
+  @Getter @Setter private House house;
+
   @ManyToMany( cascade = {
     CascadeType.PERSIST,
     CascadeType.MERGE
-  })
+  }, fetch = FetchType.LAZY )
   @JoinTable(
     name = "service_tag",
     joinColumns = @JoinColumn(name = "service_id"),
