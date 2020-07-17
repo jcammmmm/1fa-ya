@@ -1,0 +1,120 @@
+{
+  "employees": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "http://localhost:8081/api/employees/4",
+        "headers": {
+          "Accept": "application/hal+json",
+          "Content-Type": "text/plain"
+        },
+        "canceled": false
+      },
+      "url": "http://localhost:8081/api/employees/4",
+      "raw": {},
+      "status": {
+        "code": 200,
+        "text": ""
+      },
+      "headers": {
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Connection": "keep-alive",
+        "Content-Type": "application/hal+json",
+        "Date": "Fri, 17 Jul 2020 16:25:25 GMT",
+        "Etag": "\"0\"",
+        "Expires": "0",
+        "Keep-Alive": "timeout=60",
+        "Pragma": "no-cache",
+        "Transfer-Encoding": "chunked",
+        "Vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-Xss-Protection": "1; mode=block"
+      },
+      "entity": {
+        "firstName": "Frodo",
+        "lastName": "Baggins",
+        "description": "ring bearer",
+        "manager": {
+          "name": "greg",
+          "roles": [
+            "ROLE_MANAGER"
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "http://localhost:8081/api/employees/5",
+        "headers": {
+          "Accept": "application/hal+json",
+          "Content-Type": "text/plain"
+        },
+        "canceled": false
+      },
+      "url": "http://localhost:8081/api/employees/5",
+      "raw": {},
+      "status": {
+        "code": 200,
+        "text": ""
+      },
+      "headers": {
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Connection": "keep-alive",
+        "Content-Type": "application/hal+json",
+        "Date": "Fri, 17 Jul 2020 16:25:25 GMT",
+        "Etag": "\"0\"",
+        "Expires": "0",
+        "Keep-Alive": "timeout=60",
+        "Pragma": "no-cache",
+        "Transfer-Encoding": "chunked",
+        "Vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-Xss-Protection": "1; mode=block"
+      },
+      "entity": {
+        "firstName": "Bilbo",
+        "lastName": "Baggins",
+        "description": "burglar",
+        "manager": {
+          "name": "greg",
+          "roles": [
+            "ROLE_MANAGER"
+          ]
+        }
+      }
+    }
+  ],
+  "attributes": [
+    "firstName",
+    "lastName",
+    "description"
+  ],
+  "page": {
+    "size": 2,
+    "totalElements": 144,
+    "totalPages": 72,
+    "number": 0
+  },
+  "pageSize": 2,
+  "links": {
+    "first": {
+      "href": "http://localhost:8081/api/employees?page=0&size=2"
+    },
+    "self": {
+      "href": "http://localhost:8081/api/employees?size=2"
+    },
+    "next": {
+      "href": "http://localhost:8081/api/employees?page=1&size=2"
+    },
+    "last": {
+      "href": "http://localhost:8081/api/employees?page=71&size=2"
+    },
+    "profile": {
+      "href": "http://localhost:8081/api/profile/employees"
+    }
+  },
+  "loggedInManager": "anonymousUser"
+}

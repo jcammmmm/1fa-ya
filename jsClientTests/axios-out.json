@@ -1,0 +1,524 @@
+[
+  {
+    "name": "svcname441",
+    "description": "svcdescr437",
+    "avgStar": 5,
+    "timesServed": 164,
+    "hitCount": 1836,
+    "price": 4327,
+    "units": "svcunit426",
+    "publishPrice": false,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/830"
+      },
+      {
+        "photoURL": "rnd://url.photo/695"
+      },
+      {
+        "photoURL": "rnd://url.photo/211"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3001670818"
+      },
+      {
+        "number": "3101359917"
+      },
+      {
+        "number": "3111775082"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/806"
+      },
+      {
+        "uri": "rnd://url.content/515"
+      },
+      {
+        "uri": "rnd://url.content/363"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/1"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/1"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/1/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/1/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname772",
+    "description": "svcdescr134",
+    "avgStar": 4,
+    "timesServed": 90,
+    "hitCount": 482,
+    "price": 4898,
+    "units": "svcunit875",
+    "publishPrice": false,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/565"
+      },
+      {
+        "photoURL": "rnd://url.photo/445"
+      },
+      {
+        "photoURL": "rnd://url.photo/330"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3001214875"
+      },
+      {
+        "number": "3101058299"
+      },
+      {
+        "number": "3011087782"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/717"
+      },
+      {
+        "uri": "rnd://url.content/765"
+      },
+      {
+        "uri": "rnd://url.content/733"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/2"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/2"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/2/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/2/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname787",
+    "description": "svcdescr485",
+    "avgStar": 5,
+    "timesServed": 16,
+    "hitCount": 1180,
+    "price": 1805,
+    "units": "svcunit995",
+    "publishPrice": true,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/580"
+      },
+      {
+        "photoURL": "rnd://url.photo/168"
+      },
+      {
+        "photoURL": "rnd://url.photo/112"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3111702546"
+      },
+      {
+        "number": "3011804840"
+      },
+      {
+        "number": "3001291523"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/974"
+      },
+      {
+        "uri": "rnd://url.content/654"
+      },
+      {
+        "uri": "rnd://url.content/340"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/3"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/3"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/3/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/3/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname466",
+    "description": "svcdescr479",
+    "avgStar": 1,
+    "timesServed": 68,
+    "hitCount": 283,
+    "price": 8121,
+    "units": "svcunit801",
+    "publishPrice": false,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/87"
+      },
+      {
+        "photoURL": "rnd://url.photo/700"
+      },
+      {
+        "photoURL": "rnd://url.photo/675"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3111751927"
+      },
+      {
+        "number": "3001519044"
+      },
+      {
+        "number": "3011237478"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/394"
+      },
+      {
+        "uri": "rnd://url.content/527"
+      },
+      {
+        "uri": "rnd://url.content/186"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/4"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/4"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/4/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/4/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname546",
+    "description": "svcdescr117",
+    "avgStar": 1,
+    "timesServed": 48,
+    "hitCount": 487,
+    "price": 7020,
+    "units": "svcunit647",
+    "publishPrice": false,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/881"
+      },
+      {
+        "photoURL": "rnd://url.photo/968"
+      },
+      {
+        "photoURL": "rnd://url.photo/418"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3001303808"
+      },
+      {
+        "number": "3101737318"
+      },
+      {
+        "number": "3111879712"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/114"
+      },
+      {
+        "uri": "rnd://url.content/400"
+      },
+      {
+        "uri": "rnd://url.content/349"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/5"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/5"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/5/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/5/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname912",
+    "description": "svcdescr738",
+    "avgStar": 3,
+    "timesServed": 178,
+    "hitCount": 114,
+    "price": 8903,
+    "units": "svcunit398",
+    "publishPrice": true,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/484"
+      },
+      {
+        "photoURL": "rnd://url.photo/252"
+      },
+      {
+        "photoURL": "rnd://url.photo/297"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3111163742"
+      },
+      {
+        "number": "3101392475"
+      },
+      {
+        "number": "3101513649"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/740"
+      },
+      {
+        "uri": "rnd://url.content/979"
+      },
+      {
+        "uri": "rnd://url.content/120"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/6"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/6"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/6/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/6/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname271",
+    "description": "svcdescr821",
+    "avgStar": 5,
+    "timesServed": 27,
+    "hitCount": 256,
+    "price": 3992,
+    "units": "svcunit505",
+    "publishPrice": true,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/125"
+      },
+      {
+        "photoURL": "rnd://url.photo/843"
+      },
+      {
+        "photoURL": "rnd://url.photo/724"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3101223226"
+      },
+      {
+        "number": "3011954730"
+      },
+      {
+        "number": "3001762555"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/391"
+      },
+      {
+        "uri": "rnd://url.content/822"
+      },
+      {
+        "uri": "rnd://url.content/30"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/7"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/7"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/7/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/7/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname66",
+    "description": "svcdescr233",
+    "avgStar": 1,
+    "timesServed": 72,
+    "hitCount": 882,
+    "price": 8663,
+    "units": "svcunit987",
+    "publishPrice": true,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/894"
+      },
+      {
+        "photoURL": "rnd://url.photo/733"
+      },
+      {
+        "photoURL": "rnd://url.photo/381"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3011390591"
+      },
+      {
+        "number": "3101356945"
+      },
+      {
+        "number": "3101755535"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/882"
+      },
+      {
+        "uri": "rnd://url.content/945"
+      },
+      {
+        "uri": "rnd://url.content/675"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/8"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/8"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/8/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/8/tags"
+      }
+    },
+    "house": {}
+  },
+  {
+    "name": "svcname488",
+    "description": "svcdescr314",
+    "avgStar": 1,
+    "timesServed": 122,
+    "hitCount": 537,
+    "price": 871,
+    "units": "svcunit17",
+    "publishPrice": true,
+    "photos": [
+      {
+        "photoURL": "rnd://url.photo/34"
+      },
+      {
+        "photoURL": "rnd://url.photo/719"
+      },
+      {
+        "photoURL": "rnd://url.photo/371"
+      }
+    ],
+    "cellphones": [
+      {
+        "number": "3001961514"
+      },
+      {
+        "number": "3111764817"
+      },
+      {
+        "number": "3101411029"
+      }
+    ],
+    "webUris": [
+      {
+        "uri": "rnd://url.content/629"
+      },
+      {
+        "uri": "rnd://url.content/804"
+      },
+      {
+        "uri": "rnd://url.content/455"
+      }
+    ],
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/services/9"
+      },
+      "service": {
+        "href": "http://localhost:8080/services/9"
+      },
+      "house": {
+        "href": "http://localhost:8080/services/9/house"
+      },
+      "tags": {
+        "href": "http://localhost:8080/services/9/tags"
+      }
+    },
+    "house": {}
+  }
+]

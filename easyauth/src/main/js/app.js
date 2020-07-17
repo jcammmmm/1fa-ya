@@ -1,29 +1,23 @@
 'use strict';
 
-import { Paper } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import ServiceList from './components/ServiceList';
 const when = require('when');
 const client = require('./client');
 const follow = require('./follow'); // function to hop multiple links by "rel"
 const stompClient = require('./websocket-listener');
-const axios = require('axios');
 
 const root = '/api';
 
 
-// const CreateDialog = require('./components/CreateDialog.js')
-// const EmployeeList = require('./components/EmployeeList.js')
+import CreateDialog from './components/CreateDialog.js'
+import EmployeeList from './components/EmployeeList.js'
 
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {services: {}, employees: [], attributes: [], page: 1, pageSize: 2, links: {}
+		this.state = {employees: [], attributes: [], page: 1, pageSize: 2, links: {}
 		   , loggedInManager: this.props.loggedInManager};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
@@ -211,56 +205,31 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.loadFromServer(this.state.pageSize);
-		// stompClient.register([
-		// 	{route: '/topic/newEmployee', callback: this.refreshAndGoToLastPage},
-		// 	{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
-		// 	{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
-    // ]);
-
-    let config = { headers: { 'Access-Control-Allow-Origin': 'https://localhost:8081' }}
-    axios.get("http://localhost:8080/services", config)
-            .then(response => {
-              return response.data._embedded.services.map(svc => {
-                let p = axios.get(svc._links.house.href);
-                svc.house = p;
-                return svc;
-              })
-            })
-            .then(svcPromises => {
-              return when.all(svcPromises)
-            })
-            .then(r => { this.setState({ services: r }) })
-            .catch(e => console.log(e));
-
-    console.log(this.state)
-
+		this.loadFromServer(this.state.pageSize);
+		stompClient.register([
+			{route: '/topic/newEmployee', callback: this.refreshAndGoToLastPage},
+			{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
+			{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
+    ]);
   }
   
 	render() {
-    console.log(this.state.services);
+    console.log(this.state)
+
 		return (
-    <div>
-			<Router>
-        <NavBar/>
-        {/** if you remove this div you will get your content behind the navbar */}
-        <div style={{marginTop: 50}} />
-        {/*This module is OK!! <Route path="/" component={OTPForm} /> */} 
-        <Route path="/" children={<ServiceList services={this.state.services} />} /> 
-				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-				<EmployeeList page={this.state.page}
-							  employees={this.state.employees}
-							  links={this.state.links}
-							  pageSize={this.state.pageSize}
-							  attributes={this.state.attributes}
-							  onNavigate={this.onNavigate}
-							  onUpdate={this.onUpdate}
-							  onDelete={this.onDelete}
-							  updatePageSize={this.updatePageSize}
-							  loggedInManager={this.state.loggedInManager}/> */}
-        
-			</Router>
-    </div>
+      <div>
+          <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
+          <EmployeeList page={this.state.page}
+                  employees={this.state.employees}
+                  links={this.state.links}
+                  pageSize={this.state.pageSize}
+                  attributes={this.state.attributes}
+                  onNavigate={this.onNavigate}
+                  onUpdate={this.onUpdate}
+                  onDelete={this.onDelete}
+                  updatePageSize={this.updatePageSize}
+                  loggedInManager={this.state.loggedInManager}/>
+      </div>
 		)
 	}
 }
