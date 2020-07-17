@@ -39,3 +39,10 @@
 - Since the javascript frontend and the data will be served from   
   diferent hosts we must configure properly CORS. To do that we added  
   a @CrossOrigin("http://localhost:8081") annotation to ServiceRepository.  
+
+
+# TODO
+[ ] Make the service's house fetch efficient. (Review Tag fetching, they are
+    efficient)
+
+[ ] Clean your services array...

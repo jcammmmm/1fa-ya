@@ -217,11 +217,24 @@ class App extends React.Component {
 		// 	{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
 		// 	{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
     // ]);
-    
+
     let config = { headers: { 'Access-Control-Allow-Origin': 'https://localhost:8081' }}
     axios.get("http://localhost:8080/services", config)
-            .then(r => { this.setState({ services: r.data._embedded.services }) })
+            .then(response => {
+              return response.data._embedded.services.map(svc => {
+                let p = axios.get(svc._links.house.href);
+                svc.house = p;
+                return svc;
+              })
+            })
+            .then(svcPromises => {
+              return when.all(svcPromises)
+            })
+            .then(r => { this.setState({ services: r }) })
             .catch(e => console.log(e));
+
+    console.log(this.state)
+
   }
   
 	render() {
@@ -230,16 +243,10 @@ class App extends React.Component {
     <div>
 			<Router>
         <NavBar/>
-        <Paper style={{marginTop: 80, height: '100%', padding: 15}}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Bienvenido!
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Por favor digita el código de 6 caracteres que enviamos en la invitación:
-                </Typography>
-                {/*This module is OK!! <Route path="/" component={OTPForm} /> */} 
-                <Route path="/" children={<ServiceList services={this.state.services} />} /> 
-        </Paper>
+        {/** if you remove this div you will get your content behind the navbar */}
+        <div style={{marginTop: 50}} />
+        {/*This module is OK!! <Route path="/" component={OTPForm} /> */} 
+        <Route path="/" children={<ServiceList services={this.state.services} />} /> 
 				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
 							  employees={this.state.employees}
@@ -251,6 +258,7 @@ class App extends React.Component {
 							  onDelete={this.onDelete}
 							  updatePageSize={this.updatePageSize}
 							  loggedInManager={this.state.loggedInManager}/> */}
+        
 			</Router>
     </div>
 		)

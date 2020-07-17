@@ -90,22 +90,30 @@ class OTPForm extends Component {
           </Grid>
         );
     }
-
+    
     return (
-      <form onSubmit={this.onSubmit}>
-        <Grid container spacing={1} justify="center" style={{ padding: '40px 0px' }} >
-          {fields}
-        </Grid>
-        <Button
-                style={{ align: 'right' }}
-                variant="contained"
-                size="small"
-                color="primary"
-                type="submit"
-              >
-                Enviar
-        </Button>
-      </form>
+      <Paper style={{marginTop: 80, height: '100%', padding: 15}}>
+        <Typography gutterBottom variant="h5" component="h2">
+          Bienvenido!
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Por favor digita el código de 6 caracteres que enviamos en la invitación:
+        </Typography>
+        <form onSubmit={this.onSubmit}>
+          <Grid container spacing={1} justify="center" style={{ padding: '40px 0px' }} >
+            {fields}
+          </Grid>
+          <Button
+                  style={{ align: 'right' }}
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  type="submit"
+                >
+                  Enviar
+          </Button>
+        </form>
+      </Paper>
     );
   }
 }
