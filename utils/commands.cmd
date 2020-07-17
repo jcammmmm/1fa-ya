@@ -6,6 +6,20 @@ python.exe .\manage.py startapp leads
 python .\manage.py makemigrations leads
 python .\manage.py migrate
 
+npm init
+npx webpack-cli init
+/**
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+*/
+
 npm i redux react-redux redux-thunk redux-devtools-extension
 npm i axios
 
