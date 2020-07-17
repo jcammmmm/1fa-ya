@@ -1,19 +1,15 @@
 import React, { Component, Fragment } from 'react';
+import RecipeReviewCard from './RecipeReviewCard';
 
 class Service extends Component {
-  HOST = "http://localhost:8080";
-
+  
   constructor(props) {
     super(props);
-    this.state = {  }
-  }
-
-  componentDidMount() {
-    fetch(this.HOST + "services");
+    this.state = { }
   }
 
   render() { 
-    return (<Fragment></Fragment>);
+    return (<RecipeReviewCard/>);
   }
 }
  

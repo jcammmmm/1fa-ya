@@ -218,16 +218,14 @@ class App extends React.Component {
 		// 	{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
     // ]);
     
-    // let serviceData = fetch("http://localhost:8080/services")
-    //                       .then(response => response.json());
-    let services = {};
     let config = { headers: { 'Access-Control-Allow-Origin': 'https://localhost:8081' }}
     axios.get("http://localhost:8080/services", config)
-            .then(r => { this.setState({ services: r.data._embedded.services }, () => console.log(this.state)) })
+            .then(r => { this.setState({ services: r.data._embedded.services }) })
             .catch(e => console.log(e));
   }
-
+  
 	render() {
+    console.log(this.state.services);
 		return (
     <div>
 			<Router>
