@@ -7,7 +7,7 @@ import com.jcflorezv.unfaya.houseServices.models.Service;
 import org.springframework.data.repository.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin({"http://localhost:8081", "http://127.0.0.1:5500"})
 public interface ServiceRepository extends Repository<Service, Long> {
   Service save(Service service);
   Service findById(Long id);

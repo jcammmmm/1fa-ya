@@ -40,6 +40,10 @@
   diferent hosts we must configure properly CORS. To do that we added  
   a @CrossOrigin("http://localhost:8081") annotation to ServiceRepository.  
 
+- This toolchaining is nice, reloads on every change!
+    * VsCode with LiveServer -> Webpack + watch -> Firefox
+  
+
 
 # TODO
 [ ] Make the service's house fetch efficient. (Review Tag fetching, they are
