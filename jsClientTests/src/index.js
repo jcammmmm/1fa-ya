@@ -123,14 +123,14 @@ p.then((successMessage) => {
  * MDN medium example
  ************************************************************/
 // To experiment with error handling, "threshold" values cause errors randomly
-const THRESHOLD_A = 9; // can use zero 0 to guarantee error
+const THRESHOLD_A = 5; // can use zero 0 to guarantee error
 
 function tetheredGetNumber(resolve, reject) {
   try {
     setTimeout( 
       function() {
         const randomInt = Date.now();
-        const value = randomInt % 10;
+        const value = 4 // randomInt % 10;
         try { 
           if(value >= THRESHOLD_A) {
             throw new Error(`Too large: ${value}`);
@@ -140,7 +140,7 @@ function tetheredGetNumber(resolve, reject) {
         }
       resolve(value);
       return;
-    }, 3000);
+    }, 500);
     // To experiment with error at set-up, uncomment the following 'throw'.
     // throw new Error("Bad setup");
   } catch(err) {
@@ -180,7 +180,7 @@ function promiseGetWord(parityInfo) {
   .then(determineParity,troubleWithGetNumber)
   .then(promiseGetWord)
   .then((info) => { 
-    console.log("Got: ",info.theNumber," , ", info.wordEvenOdd); 
+    console.log("Got: ",info.theNumber,", ", info.wordEvenOdd); 
     return info; 
   })
   .catch((reason) => {
@@ -193,3 +193,56 @@ function promiseGetWord(parityInfo) {
    })
   .finally((info) => console.log("All done"));
 
+
+
+/************************************************************
+ * MDN advanced example
+ ************************************************************/
+
+var promiseCount = 0;
+
+function testPromise() {
+    let thisPromiseCount = ++promiseCount;
+
+    let log = document.getElementById('log');
+    log.insertAdjacentHTML('beforeend', thisPromiseCount +
+        ') Started (<small>Sync code started</small>)<br/>');
+
+    // We make a new promise: we promise a numeric count of this promise, starting from 1 (after waiting 3s)
+    let p1 = new Promise(
+        // The executor function is called with the ability to resolve or
+        // reject the promise
+       (resolve, reject) => {
+            log.insertAdjacentHTML('beforeend', thisPromiseCount +
+                ') Promise started (<small>Async code started</small>)<br/>');
+            // This is only an example to create asynchronism
+            setTimeout(
+                function() {
+                    // We fulfill the promise !
+                    resolve(thisPromiseCount);
+                }, Math.random() * 2000 + 1000);
+        }
+    );
+
+    // We define what to do when the promise is resolved with the then() call,
+    // and what to do when the promise is rejected with the catch() call
+    p1.then(
+        // Log the fulfillment value
+        function(val) {
+            log.insertAdjacentHTML('beforeend', val +
+                ') Promise fulfilled (<small>Async code terminated</small>)<br/>');
+        }).catch(
+        // Log the rejection reason
+       (reason) => {
+            console.log('Handle rejected promise ('+reason+') here.');
+        });
+
+    log.insertAdjacentHTML('beforeend', thisPromiseCount +
+        ') Promise made (<small>Sync code terminated</small>)<br/>');
+}
+
+testPromise();
+testPromise();
+testPromise();
+testPromise();
+  
