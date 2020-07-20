@@ -1,6 +1,7 @@
 package com.jcflorezv.unfaya.houseServices.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.jcflorezv.unfaya.houseServices.models.Service;
 import com.jcflorezv.unfaya.houseServices.repositories.ServiceRepository;
@@ -25,7 +26,7 @@ public class HouseController {
   // TODO Replace this by House entities
   @GetMapping("/firstService")
   public Service findFirstService() {
-    Service svc = serviceRepo.findById(1L);
-    return svc;
+    Optional<Service> svc = serviceRepo.findById(1L);
+    return svc.get();
   }
 } 
