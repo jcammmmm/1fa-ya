@@ -1,3 +1,6 @@
+bundle.js
+bundle.js.map
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

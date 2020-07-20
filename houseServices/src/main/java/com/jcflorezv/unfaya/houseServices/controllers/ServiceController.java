@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HouseController {
-
+public class ServiceController {
   @Autowired
   private ServiceRepository serviceRepo;
-  
-  // TODO Replace this by House entities
-  @GetMapping("/allServices")
+ 
+ 
+  @GetMapping("/services")
   public List<Service> findAllServices() {
     List<Service> svcs = serviceRepo.findAll();
     return svcs;
   }
-  
-  // TODO Replace this by House entities
-  @GetMapping("/firstService")
-  public Service findFirstService() {
-    Service svc = serviceRepo.findById(1L);
-    return svc;
-  }
-} 
+
+}
