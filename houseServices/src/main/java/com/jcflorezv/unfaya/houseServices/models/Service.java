@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.NaturalId;
 
 import lombok.Getter;
@@ -52,6 +54,7 @@ public class Service {
     joinColumns = @JoinColumn(name = "service_id"),
     inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
+  @JsonManagedReference
   @Getter @Setter private Set<Tag> tags = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

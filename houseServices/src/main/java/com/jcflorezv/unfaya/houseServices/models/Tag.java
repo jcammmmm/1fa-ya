@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import org.hibernate.annotations.NaturalId;
 
 import lombok.Getter;
@@ -27,6 +29,7 @@ public class Tag {
   @Getter @Setter private String name;
 
   @ManyToMany(mappedBy = "tags")
+  @JsonBackReference
   @Getter @Setter private Set<Service> services = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
   public Tag() {
