@@ -6,11 +6,15 @@ class ServiceList extends Component {
     super(props);
     this.state = {  }
   }
+
   render() { 
-    console.log(this.props.services[0]);
-    return (<Fragment>
-      <Service service={this.props.services[0]} />
-    </Fragment>);
+    const services = this.props.services.map(service => <Service key={service.id} service={service}/>);
+    console.log(services); // 1
+    return (
+      <Fragment>
+        {services}
+      </Fragment>
+    );
   }
 }
  
