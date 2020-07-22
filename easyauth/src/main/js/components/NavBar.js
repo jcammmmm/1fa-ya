@@ -14,6 +14,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import React from 'react';
 import TemporaryDrawer from './Drawer';
 
+import logo from '../../resources/static/images/logo-large.png';
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -187,9 +189,9 @@ function NavBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              1fa-ya
-            </Typography>
+
+            <img id="logo" src={logo} style={{height: '1.2em'}} />
+
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton aria-label="show 4 new mails" color="inherit">
