@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Grid } from '@material-ui/core';
 import Service from './Service';
 
 class ServiceList extends Component {
@@ -8,12 +9,15 @@ class ServiceList extends Component {
   }
 
   render() { 
-    const services = this.props.services.map(service => <Service key={service.id} service={service}/>);
-    console.log(services); // 1
+    const services = this.props.services.map(service => 
+        <Grid item key={service.id} style={{padding: '10px'}}>
+          <Service service={service}/>
+        </Grid>
+      );
     return (
-      <Fragment>
+      <Grid container justify="center">
         {services}
-      </Fragment>
+      </Grid>
     );
   }
 }

@@ -58,8 +58,9 @@ class RecipeReviewCard extends Component {
   render() {
     // const { classes } = this.props;
     const classes = this.props.classes; // does the same thing as above
+
     return (
-      <Card className={classes.root}>
+      <Card className={classes.root} elevation={12}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
