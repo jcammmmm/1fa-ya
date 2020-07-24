@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import fastfood1 from '../../resources/static/images/fastfood/2.jpg';
+
 const styles = {
   root: {
     maxWidth: 345,
@@ -58,13 +60,14 @@ class RecipeReviewCard extends Component {
   render() {
     // const { classes } = this.props;
     const classes = this.props.classes; // does the same thing as above
+    const svc = this.props.service;
 
     return (
       <Card className={classes.root} elevation={12}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+              {svc.name.charAt(0).toUpperCase()}
             </Avatar>
           }
           action={
@@ -72,18 +75,18 @@ class RecipeReviewCard extends Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={svc.name}
+          subheader={svc.house.address}
         />
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/paella.jpg"
+          image={fastfood1}
           title="Paella dish"
+          style = {{ height: 0, paddingTop: '56%'}}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {svc.description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

@@ -1,6 +1,3 @@
-bundle.js
-bundle.js.map
-
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -32,3 +29,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+bundle.js
+bundle.js.map
+*.jpg
+*.png
+!logo-*

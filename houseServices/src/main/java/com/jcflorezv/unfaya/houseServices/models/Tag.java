@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -32,9 +33,12 @@ public class Tag {
   @JsonBackReference
   @Getter @Setter private Set<Service> services = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
+  @Transient
+  private String[] defaultTags = {"carniceria", "barberia", "comida-rapida"};
+
   public Tag() {
     Random rnd = new Random();
-    this.name = "rnd_tag_name_" + rnd.nextInt(999);
+    this.name = defaultTags[rnd.nextInt(3)];
   }
 
   @Override

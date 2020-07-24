@@ -20,10 +20,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import org.hibernate.annotations.NaturalId;
-
 import lombok.Getter;
 import lombok.Setter;
+import me.xdrop.jrand.JRand;
 
 @Entity
 public class Service {
@@ -71,8 +70,8 @@ public class Service {
 
   public Service() {
     Random rnd = new Random();
-    this.name = "svcname" + rnd.nextInt(999);
-    this.description = "svcdescr" + rnd.nextInt(999);
+    this.name = JRand.sentence().words(1,5).gen();
+    this.description = JRand.sentence().words(10, 20).gen();
     this.avgStar = rnd.nextInt(5) + 1;
     this.timesServed = rnd.nextInt(200);
     this.hitCount = rnd.nextInt(2000);
