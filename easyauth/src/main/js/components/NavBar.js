@@ -5,7 +5,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -14,7 +13,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import React from 'react';
 import TemporaryDrawer from './Drawer';
 
-import logo from '../../resources/static/images/logo-large.png';
+const logoURL = "http://localhost:8000/images/logo-large.png";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -190,7 +189,7 @@ function NavBar() {
               <MenuIcon />
             </IconButton>
 
-            <img id="logo" src={logo} style={{height: '1.2em'}} />
+            <img id="logo" src={logoURL} style={{height: '1.2em'}} />
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

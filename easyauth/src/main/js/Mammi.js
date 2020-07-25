@@ -4,7 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import ServiceList from './components/ServiceList';
+// import ServiceList from './components/ServiceList';
+import ServiceForm from './components/ServiceForm/ServiceForm'
+
 const axios = require('axios');
 
 class Mammi extends React.Component {
@@ -34,7 +36,8 @@ class Mammi extends React.Component {
           {/** if you remove this div you will get your content behind the navbar */}
           <div style={{marginTop: 70}} />
           {/*This module is OK!! <Route path="/" component={OTPForm} /> */} 
-          <Route path="/" children={<ServiceList services={this.state.services} />} /> 
+          {/*This module is OK!! <Route path="/" children={<ServiceList services={this.state.services} />} />  */}
+          <Route path="/" component={ServiceForm} />
         </Router>
       </div>
 		)

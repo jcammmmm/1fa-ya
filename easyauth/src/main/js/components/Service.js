@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import fastfood1 from '../../resources/static/images/fastfood/2.jpg';
+const tempImg = "http://localhost:8000/images/fastfood/2.jpg";
 
 const styles = {
   root: {
@@ -80,9 +80,8 @@ class RecipeReviewCard extends Component {
         />
         <CardMedia
           className={classes.media}
-          image={fastfood1}
-          title="Paella dish"
-          style = {{ height: 0, paddingTop: '56%'}}
+          image={tempImg}
+          title="Fast Food :Q.........."
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
