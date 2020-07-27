@@ -116,4 +116,17 @@ media/
 !**/migrations/__init__.py
 
 ./static/*
-./static/**/*
+./static/images/*
+static/images/fastfood/1.png
+static/images/logo-compact.png
+static/images/logo-despho.png
+static/images/logo-large.png
+static/images/logo.png
+static/images/fastfood/2.jpg
+static/images/fastfood/3.jpg
+static/images/haircut/1.jpg
+static/images/haircut/2.png
+static/images/haircut/3.jpg
+static/images/meatshop/1.jpg
+static/images/meatshop/2.jpg
+static/images/meatshop/3.jpg
