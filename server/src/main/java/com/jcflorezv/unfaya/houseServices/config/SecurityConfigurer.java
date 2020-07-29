@@ -1,5 +1,6 @@
 package com.jcflorezv.unfaya.houseServices.config;
 
+import com.jcflorezv.unfaya.houseServices.filters.JwtRequestFilter;
 import com.jcflorezv.unfaya.houseServices.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -18,13 +21,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private JwtRequestFilter jwtRequestFilter;
+
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userService);
   }
 
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests().antMatchers("/auth").permitAll().anyRequest().authenticated();
+    http.csrf().disable()
+          .authorizeRequests().antMatchers("/auth").permitAll()
+          .anyRequest().authenticated()
+          .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // We are providing session management in auth controller...
+    
+    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean
