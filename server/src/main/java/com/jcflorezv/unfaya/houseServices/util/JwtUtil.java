@@ -7,10 +7,13 @@ import java.util.function.Function;
 
 import com.jcflorezv.unfaya.houseServices.models.HomeUser;
 
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JwtUtil {
   private String SECRET_KEY = "secret";
 
@@ -53,18 +56,4 @@ public class JwtUtil {
     final String username = extractUsername(token);
     return (username.equals(homeUser.getUsername()) && !isTokenExpired(token));
   }
-
-
-
-  public static void main(String[] args) {
-    Function<Integer, Double> foo = Foo::bar;
-    System.out.println(foo.apply(7).toString());
-  }
-
-  public static class Foo {
-    public static Double bar(Integer a) {
-      return Double.valueOf(a);
-    }
-  }
-
 }

@@ -1,4 +1,4 @@
-package com.jcflorezv.unfaya.houseServices.models;
+package com.jcflorezv.unfaya.houseServices.models.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
