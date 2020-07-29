@@ -1,6 +1,6 @@
 package com.jcflorezv.unfaya.houseServices.controllers;
 
-import com.jcflorezv.unfaya.houseServices.models.HomeUser;
+import com.jcflorezv.unfaya.houseServices.models.User;
 import com.jcflorezv.unfaya.houseServices.models.Auth.AuthenticationRequest;
 import com.jcflorezv.unfaya.houseServices.models.Auth.AuthenticationResponse;
 import com.jcflorezv.unfaya.houseServices.services.UserService;
@@ -38,7 +38,7 @@ public class AuthController {
       throw new Exception("Incorrect username or password.");
     }
 
-    final HomeUser user = userService.loadUserByUsername(authenticationRequest.getUsername());
+    final User user = userService.loadUserByUsername(authenticationRequest.getUsername());
     final String jwt = jwtUtil.generateToken(user);
     return ResponseEntity.ok(new AuthenticationResponse(jwt));
   }

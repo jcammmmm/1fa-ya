@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.jcflorezv.unfaya.houseServices.models.HomeUser;
+import com.jcflorezv.unfaya.houseServices.models.User;
 
 import org.springframework.stereotype.Component;
 
@@ -38,7 +38,7 @@ public class JwtUtil {
     return extractExpiration(token).before(new Date());
   }
 
-  public String generateToken(HomeUser user) {
+  public String generateToken(User user) {
     Map<String, Object> claims = new HashMap<>();
     return createToken(claims, user.getUsername());
   }
@@ -52,8 +52,8 @@ public class JwtUtil {
                          .compact();          
   }
 
-  public Boolean validateToken(String token, HomeUser homeUser) {
+  public Boolean validateToken(String token, User user) {
     final String username = extractUsername(token);
-    return (username.equals(homeUser.getUsername()) && !isTokenExpired(token));
+    return (username.equals(user.getUsername()) && !isTokenExpired(token));
   }
 }

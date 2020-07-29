@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jcflorezv.unfaya.houseServices.models.HomeUser;
+import com.jcflorezv.unfaya.houseServices.models.User;
 import com.jcflorezv.unfaya.houseServices.services.UserService;
 import com.jcflorezv.unfaya.houseServices.util.JwtUtil;
 
@@ -40,7 +40,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       }
 
       if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-        HomeUser user = userService.loadUserByUsername(username);
+        User user = userService.loadUserByUsername(username);
         if (jwtUtil.validateToken(jwt, user)) {
           UsernamePasswordAuthenticationToken authObject = new UsernamePasswordAuthenticationToken(user, null, null);
           authObject.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

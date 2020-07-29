@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Getter;
 import lombok.Setter;
 
-public class HomeUser implements UserDetails {
+public class User implements UserDetails {
 
   private static final long serialVersionUID = 1213659374143541774L;
 
@@ -24,7 +24,7 @@ public class HomeUser implements UserDetails {
   @Setter
   private Long houseId;
 
-  public HomeUser(String userName, String pwd) {
+  public User(String userName, String pwd) {
     this.userName = userName;
     this.password = pwd;
   }
