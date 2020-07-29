@@ -1,0 +1,70 @@
+package com.jcflorezv.unfaya.houseServices.util;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import com.jcflorezv.unfaya.houseServices.models.HomeUser;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+public class JwtUtil {
+  private String SECRET_KEY = "secret";
+
+  public String extractUsername(String token) {
+    return extractClaim(token, Claims::getSubject);
+  }
+
+  public Date extractExpiration(String token) {
+    return extractClaim(token, Claims::getExpiration);
+  }
+
+  public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    final Claims claims = extractAllClaims(token);
+    return claimsResolver.apply(claims);
+  }
+
+  private Claims extractAllClaims(String token) {
+    return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+  }
+
+  private Boolean isTokenExpired(String token) {
+    return extractExpiration(token).before(new Date());
+  }
+
+  public String generateToken(HomeUser user) {
+    Map<String, Object> claims = new HashMap<>();
+    return createToken(claims, user.getUsername());
+  }
+
+  private String createToken(Map<String, Object> claims, String subject) {
+    return Jwts.builder().setClaims(claims)
+                         .setSubject(subject)
+                         .setIssuedAt(new Date(System.currentTimeMillis()))
+                         .setExpiration(new Date(System.currentTimeMillis() + 60 * 1000))  
+                         .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                         .compact();          
+  }
+
+  public Boolean validateToken(String token, HomeUser homeUser) {
+    final String username = extractUsername(token);
+    return (username.equals(homeUser.getUsername()) && !isTokenExpired(token));
+  }
+
+
+
+  public static void main(String[] args) {
+    Function<Integer, Double> foo = Foo::bar;
+    System.out.println(foo.apply(7).toString());
+  }
+
+  public static class Foo {
+    public static Double bar(Integer a) {
+      return Double.valueOf(a);
+    }
+  }
+
+}
