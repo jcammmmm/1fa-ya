@@ -13,13 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.xdrop.jrand.JRand;
-import me.xdrop.jrand.generators.text.SentenceGenerator;
 
 @Entity
-@NoArgsConstructor
 public class House {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter @Setter private Long id;
@@ -31,14 +28,14 @@ public class House {
   // https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "house_id")
-  private List<Service> services = new ArrayList<>();
+  @Getter @Setter private List<Service> services = new ArrayList<>();
 
-  public House(List<Service> services) {
+  public House() {
     Random rnd = new Random();
     this.name = JRand.sentence().words(1,5).gen();
     this.mainPhoto = "proto://cnd.uri/" + rnd.nextInt(999);
     this.location = "proto://map.uri/" + rnd.nextInt(999);
-    this.services = services;
+    // this.services = services;
 
     String[] crclldiag = {"Cr", "Cll"};
     this.address = crclldiag[rnd.nextInt(2)] + " " + (rnd.nextInt(67) + 1) + " # " + (rnd.nextInt(67) + 1) + " - " + (rnd.nextInt(67) + 1);
