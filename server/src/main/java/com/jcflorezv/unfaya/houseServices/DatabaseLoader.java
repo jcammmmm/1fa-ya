@@ -10,6 +10,7 @@ import com.jcflorezv.unfaya.houseServices.models.Tag;
 import com.jcflorezv.unfaya.houseServices.models.User;
 import com.jcflorezv.unfaya.houseServices.repositories.HouseRepository;
 import com.jcflorezv.unfaya.houseServices.repositories.ServiceRepository;
+import com.jcflorezv.unfaya.houseServices.repositories.TagRepository;
 import com.jcflorezv.unfaya.houseServices.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-  private final HouseRepository hrepo;
-  private final ServiceRepository srepo;
-  private final UserRepository urepo;
-
-  @Autowired
-  public DatabaseLoader(HouseRepository hrepo, ServiceRepository srepo, UserRepository urepo) {
-    this.hrepo = hrepo;
-    this.srepo = srepo;
-    this.urepo = urepo;
-  }
+  @Autowired private HouseRepository hrepo;
+  @Autowired private ServiceRepository srepo;
+  @Autowired private UserRepository urepo;
+  @Autowired private TagRepository trepo;
 
   @Override
   @Transactional // https://stackoverflow.com/questions/40247030/detached-entity-passed-to-persist-in-spring-data
+
   public void run(String... args) throws Exception {
+    storeTags();
+    storeEverythingElse();    
+  }
+
+  private void storeTags() {
+    if (trepo.findByName("A") == null) { trepo.save(new Tag("A")); }
+    if (trepo.findByName("B") == null) { trepo.save(new Tag("B")); }
+    if (trepo.findByName("C") == null) { trepo.save(new Tag("C")); }
+  }
+
+  private void storeEverythingElse() {
 
     User user1 = new User("user1", "pass1");
     User user2 = new User("user2", "pass2");
@@ -41,11 +48,11 @@ public class DatabaseLoader implements CommandLineRunner {
     House house1 = new House();
     House house2 = new House();
     House house3 = new House();
-    
-    Tag tag1 = new Tag();
-    Tag tag2 = new Tag();
-    Tag tag3 = new Tag();
-
+  
+    Tag tag1 = trepo.findByName("A");
+    Tag tag2 = trepo.findByName("B");
+    Tag tag3 = trepo.findByName("C");
+  
     Service[] svcs = new Service[9];
     for(int i = 0; i < svcs.length; i++) {
       svcs[i] = new Service();

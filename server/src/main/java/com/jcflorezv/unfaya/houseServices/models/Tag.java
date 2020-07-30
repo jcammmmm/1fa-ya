@@ -2,25 +2,24 @@ package com.jcflorezv.unfaya.houseServices.models;
 
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import org.hibernate.annotations.NaturalId;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
 public class Tag {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +32,8 @@ public class Tag {
   @JsonBackReference
   @Getter @Setter private Set<Service> services = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
-  @Transient
-  private String[] defaultTags = {"carniceria", "barberia", "comida-rapida"};
-
-  public Tag() {
-    Random rnd = new Random();
-    this.name = defaultTags[rnd.nextInt(3)];
+  public Tag(String name) {
+    this.name = name;
   }
 
   @Override
