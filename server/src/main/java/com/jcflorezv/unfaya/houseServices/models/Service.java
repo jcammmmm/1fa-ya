@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -42,6 +43,7 @@ public class Service {
     fetch = FetchType.EAGER
   )
   @JoinColumn(name = "house_id")
+  @JsonBackReference
   @Getter @Setter private House house;
 
   @ManyToMany( cascade = {
