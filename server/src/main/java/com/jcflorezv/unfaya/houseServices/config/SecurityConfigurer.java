@@ -1,5 +1,6 @@
 package com.jcflorezv.unfaya.houseServices.config;
 
+import com.jcflorezv.unfaya.houseServices.filters.CorsFilter;
 import com.jcflorezv.unfaya.houseServices.filters.JwtRequestFilter;
 import com.jcflorezv.unfaya.houseServices.services.UserService;
 
@@ -14,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -30,12 +32,19 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
   }
 
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable()
+    http.addFilterBefore(corsFilter(), SessionManagementFilter.class);
+    http.cors().disable().csrf().disable()
           .authorizeRequests().antMatchers("/auth").permitAll()
           .anyRequest().authenticated()
           .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // We are providing session management in auth controller...
     
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+  }
+
+  @Bean
+  CorsFilter corsFilter() {
+      CorsFilter filter = new CorsFilter();
+      return filter;
   }
 
   @Bean
