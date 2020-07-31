@@ -43,7 +43,7 @@ public class Service {
     fetch = FetchType.EAGER
   )
   @JoinColumn(name = "house_id")
-  @JsonBackReference
+  @JsonManagedReference
   @Getter @Setter private House house;
 
   @ManyToMany( cascade = {

@@ -8,26 +8,11 @@ import OTPForm from './components/OTPForm';
 import ServiceList from './components/ServiceList';
 import ServiceForm from './components/ServiceForm/ServiceForm';
 
-const axios = require('axios');
-
 class Mammi extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {services: []};
 	}
-
-
-	componentDidMount() {
-    let config = { headers: { 'Access-Control-Allow-Origin': 'https://localhost:8081' }}
-    axios.get("http://localhost:8080/services?size=6", config)
-            .then(r => {
-              this.setState({ 
-                services: r.data._embedded.services 
-              }); 
-            })
-            .catch(e => console.log(e));
-  }
   
 	render() {
 		return (
@@ -37,7 +22,7 @@ class Mammi extends React.Component {
           {/** if you remove this div you will get your content behind the navbar */}
           <div style={{marginTop: 70}} />
           <Route exact path="/otp" component={OTPForm} /> 
-          <Route exact path="/services" children={<ServiceList services={this.state.services} />} /> 
+          <Route exact path="/services" component={ServiceList} /> 
           <Route exact path="/create" component={ServiceForm} />
         </Router>
       </div>
