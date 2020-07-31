@@ -1,7 +1,7 @@
 @@echo off
 
 REM launch cdn server
-call python -m http.server --directory static
+call python -m http.server -h 0.0.0.0
 
 REM start database container
 docker start postgresdb

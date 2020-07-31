@@ -13,7 +13,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import React from 'react';
 import TemporaryDrawer from './Drawer';
 
-const logoURL = "http://localhost:8000/images/logo-large.png";
+const logoURL = "http://192.168.1.15:8000/images/logo-large.png";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

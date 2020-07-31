@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const tempImg = "http://localhost:8000/images/fastfood/2.jpg";
+const tempImg = "http://192.168.1.15:8000/images/fastfood/2.jpg";
 
 const styles = {
   root: {
@@ -56,7 +56,7 @@ class RecipeReviewCard extends Component {
       expanded: !this.state.expanded
     })
   };
-
+  
   render() {
     // const { classes } = this.props;
     const classes = this.props.classes; // does the same thing as above
