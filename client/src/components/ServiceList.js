@@ -12,7 +12,7 @@ const axios = require('axios');
 
 const styles = theme => ({
   fab: {
-      position: 'absolute',
+      position: 'fixed',
       bottom: theme.spacing(4),
       right: theme.spacing(4),
     },
