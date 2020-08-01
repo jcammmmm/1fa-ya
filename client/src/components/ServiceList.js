@@ -18,6 +18,7 @@ const styles = theme => ({
     },
 })
 
+// TODO: add a backdrop while data loads....
 class ServiceList extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +45,8 @@ class ServiceList extends Component {
           <Service service={service}/>
         </Grid>
       );
+
+    // TODO: add a tooltip
     return (
       <Grid container justify="center">
         {services}

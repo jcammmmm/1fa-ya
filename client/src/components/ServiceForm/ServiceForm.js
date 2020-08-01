@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {withStyles} from '@material-ui/core/styles'
-import { Paper, Typography, Step, Stepper, StepLabel, StepContent, Button } from '@material-ui/core';
+import { Paper, Typography, Step, Stepper, StepLabel, StepContent, StepConnector, Button } from '@material-ui/core';
 import ServiceFormDetails from './ServiceFormDetails';
 import ServiceFormImages from './ServiceFormImages';
 import ServiceFormOverview from './ServiceFormOverview';
@@ -11,7 +11,7 @@ const styles = theme => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
+    padding: theme.spacing(3, 0.5),
     // [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
     //   marginTop: theme.spacing(6),
     //   marginBottom: theme.spacing(6),
@@ -20,6 +20,17 @@ const styles = theme => ({
     actionsContainer: {
       marginBottom: theme.spacing(2)
     }
+  },
+  stepper: {
+    padding: theme.spacing(3, 1.8, 5),
+  },
+  stepContent: {
+    borderLeft: 0,
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+  stepperLine: {
+    display: 'none'
   }
 })
 
@@ -42,7 +53,7 @@ class ServiceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 0
+      activeStep: 1
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -68,28 +79,32 @@ class ServiceForm extends Component {
           <Typography component="h1" variant="h5" align="center"> 
             Agrega lo que ofreces!
           </Typography>
-          <Stepper activeStep={this.state.activeStep} orientation="vertical">
+          <Stepper orientation="vertical" 
+                   activeStep={this.state.activeStep}
+                   className={classes.stepper}
+                   connector={<StepConnector classes={{ line: classes.stepperLine }}/>}
+          >
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
-                <StepContent>
-                <Fragment>
-                  {getStepContent(index)}
-                </Fragment>
-                <div>
-                  <Button
-                    disabled={this.state.activeStep === 0}
-                    onClick={this.handleBack}
-                  >
-                    Atrás
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={this.handleNext}
-                  >
-                    Siguiente
-                  </Button>
-                </div>
+                <StepContent classes={{ root: classes.stepContent}}>
+                  <Fragment>
+                    {getStepContent(index)}
+                  </Fragment>
+                  <div>
+                    <Button
+                      disabled={this.state.activeStep === 0}
+                      onClick={this.handleBack}
+                    >
+                      Atrás
+                    </Button>
+                    <Button
+                      color="primary"
+                      onClick={this.handleNext}
+                    >
+                      Siguiente
+                    </Button>
+                  </div>
                 </StepContent>
               </Step>
             ))}
