@@ -8,6 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListIcon from '@material-ui/icons/List';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import BlurOnIcon from '@material-ui/icons/BlurOn';
@@ -52,31 +54,44 @@ export default function TemporaryDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-          <ListItem button 
-                    key={"somekey"}
-                    component={NavLink}
-                    to="api/qrcodes">
-              <ListItemIcon>
-                <BlurOnIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Códigos QR"} />
-          </ListItem>
-          <ListItem button 
-                    key={"somekey2"}
-                    component={NavLink}
-                    to="/">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Inicio"} />
-          </ListItem>
+        <ListItem button 
+                  key={"somekey1"}
+                  component={NavLink}
+                  to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Inicio"} />
+        </ListItem>
+        <ListItem button 
+                  key={"somekey4"}
+                  component={NavLink}
+                  to="/services">
+            <ListItemIcon>
+              <ListIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Servicios"} />
+        </ListItem>
+        <ListItem button 
+                  key={"somekey3"}
+                  component={NavLink}
+                  to="api/qrcodes">
+            <ListItemIcon>
+              <BlurOnIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Códigos QR"} />
+        </ListItem>
+        <ListItem button 
+                  key={"somekey2"}
+                  component={NavLink}
+                  to="/otp">
+            <ListItemIcon>
+              <VpnKeyIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Ingresa"} />
+        </ListItem>
 
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+
       </List>
       <Divider />
       <List>

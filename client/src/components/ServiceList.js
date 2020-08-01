@@ -1,9 +1,22 @@
 import React, { Component, Fragment } from 'react';
+import {withStyles} from '@material-ui/core/styles'
+
 import Grid from '@material-ui/core/Grid';
 import Service from './Service';
 
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom';
+
 const axios = require('axios');
 
+const styles = theme => ({
+  fab: {
+      position: 'absolute',
+      bottom: theme.spacing(4),
+      right: theme.spacing(4),
+    },
+})
 
 class ServiceList extends Component {
   constructor(props) {
@@ -25,6 +38,7 @@ class ServiceList extends Component {
 
 
   render() { 
+    const {classes} = this.props;
     const services = this.state.services.map(service => 
         <Grid item key={service.id} style={{padding: '10px'}}>
           <Service service={service}/>
@@ -33,9 +47,18 @@ class ServiceList extends Component {
     return (
       <Grid container justify="center">
         {services}
+        <Link to="/create">
+          <Fab 
+            color="primary" 
+            aria-label="add" 
+            className={classes.fab}
+          >
+            <AddIcon />
+          </Fab>
+        </Link>
       </Grid>
     );
   }
 }
  
-export default ServiceList;
+export default  withStyles(styles)(ServiceList);
