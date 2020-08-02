@@ -4,6 +4,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
 import CarouselUploadedImages from './ServiceFormUploadedImages'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 class ServiceFormImages extends Component {
 
@@ -39,7 +40,8 @@ class ServiceFormImages extends Component {
       <CarouselUploadedImages/>
       <Button
         color="secondary"
-        onClick={this.handleClick}
+        onClick={this.handleClick}        
+        startIcon={<CloudUploadIcon />}
       >
         Seleccionar
       </Button>

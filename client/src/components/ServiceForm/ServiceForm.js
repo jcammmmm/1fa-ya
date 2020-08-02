@@ -53,7 +53,7 @@ class ServiceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 1
+      activeStep: 0
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -114,7 +114,7 @@ class ServiceForm extends Component {
               <Typography>Vuelve atrás y busca tu servicio en la lista!</Typography>
               <Link to="/services" style={{ textDecoration: 'none' }}>
                 <Button
-                  color="primary"
+                  color="default"
                   variant="contained"
                 >
                   Volver

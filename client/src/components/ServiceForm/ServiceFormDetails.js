@@ -1,97 +1,166 @@
 import React, { Component, Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import withStyles from '@material-ui/core/styles/withStyles'
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import PlusOneIcon from '@material-ui/icons/PlusOne';
+import AddIcon from '@material-ui/icons/Add';
+import { Zoom, Paper, Collapse  } from '@material-ui/core';
+import AddContacts from './details/AddContacts'
+
+const styles = theme => ({
+  checkBox: {
+    '& > .MuiGrid-item': {
+      padding: theme.spacing(0)
+    }
+  }
+});
 
 class ServiceFormDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = { 
+      serviceName: "",
+      serviceDetails: "",
+      servicePrice: "",
+      showPrice: false,
+      tradeable: true,
+      tags: [],
+      contacts: [],
+      webUris: [],
+      formControls: {
+        showAddContacts: false,
+        showAddTags: false,
+        showAddWebUris: false
+      }
+    }
+    this.handleInputTextChange = this.handleInputTextChange.bind(this)
+    this.handleInputNumberChange = this.handleInputNumberChange.bind(this)
+    this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this)
   }
+
+  handleInputTextChange(event) {
+    const target = event.target;
+    this.setState({
+      [target.name]: target.value
+    })
+  }
+
+  handleInputNumberChange(event) {
+    const target = event.target;
+    this.setState({
+      [target.name]: target.value
+    })
+  }
+
+  handleCheckBoxChange(event) {
+    const target = event.target;
+    this.setState({
+      [target.name]: target.checked
+    })
+  }
+
   render() { 
+    const {classes} = this.props
     return (
       <Fragment>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="firstName"
-              name="firstName"
-              label="First name"
+              id="serviceName"
+              name="serviceName"
+              label="Nombre"
               fullWidth
               autoComplete="given-name"
+              onChange={this.handleInputTextChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
-              id="lastName"
-              name="lastName"
-              label="Last name"
+              id="serviceDescription"
+              name="serviceDescription"
+              label="Descripción"
               fullWidth
+              multiline
               autoComplete="family-name"
+              onChange={this.handleInputTextChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="address1"
-              name="address1"
-              label="Address line 1"
-              fullWidth
-              autoComplete="shipping address-line1"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="address2"
-              name="address2"
-              label="Address line 2"
-              fullWidth
-              autoComplete="shipping address-line2"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="city"
-              name="city"
-              label="City"
-              fullWidth
-              autoComplete="shipping address-level2"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
-              fullWidth
-              autoComplete="shipping postal-code"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="country"
-              name="country"
-              label="Country"
-              fullWidth
-              autoComplete="shipping country"
-            />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <FormControlLabel
-              control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-              label="Use this address for payment details"
+              control={
+                <Checkbox 
+                  color="primary" 
+                  name="tradeable" 
+                  checked={this.state.tradeable} 
+                  onChange={this.handleCheckBoxChange}
+                />
+              }
+              label="aceptas intercambios?"
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControlLabel
+              control={
+                <Checkbox 
+                  color="primary" 
+                  name="showPrice" 
+                  checked={this.state.showPrice} 
+                  onChange={this.handleCheckBoxChange}
+                />
+              }
+              label="publicar precio?"
+            />
+          </Grid>
+          {this.state.showPrice &&
+            <Zoom in={this.state.showPrice}>
+              <Grid item container xs={12} sm={6}>
+                    <TextField
+                        id="servicePrice"
+                        name="servicePrice"
+                        label="Precio"
+                        autoComplete="price"
+                        type="number"
+                        onChange={this.handleInputNumberChange}
+                        InputProps={{
+                          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                        }}
+                        fullWidth
+                      />
+              </Grid>
+            </Zoom>
+          }
+          <Grid item xs={12} md={6}>
+            <AddContacts />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Button
+              color="secondary"
+              startIcon={<AddIcon />}
+              onClick={this.handleAddContact}
+            >
+              Agregar Redes Sociales
+            </Button>
+          </Grid>
+
+          {/* 
+          <
+          <Grid item xs={12} md={6}>
+            <Button
+              color="secondary"
+              startIcon={<AddIcon />}
+              onClick={this.handleAddContact}
+            >
+              Añadir Etiquetas
+            </Button>
+          </Grid> */}
         </Grid>
       </Fragment>
     );
