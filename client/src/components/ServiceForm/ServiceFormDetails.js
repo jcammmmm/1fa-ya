@@ -70,7 +70,7 @@ class ServiceFormDetails extends Component {
     const {classes} = this.props
     return (
       <Fragment>
-        <Grid container spacing={3}>
+        <Grid container spacing={0}>
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -106,7 +106,7 @@ class ServiceFormDetails extends Component {
               label="aceptas intercambios?"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={7} sm={6}>
             <FormControlLabel
               control={
                 <Checkbox 
@@ -119,24 +119,23 @@ class ServiceFormDetails extends Component {
               label="publicar precio?"
             />
           </Grid>
-          {this.state.showPrice &&
-            <Zoom in={this.state.showPrice}>
-              <Grid item container xs={12} sm={6}>
+          <Grid item container xs={5} sm={6}>
+            <Collapse in={this.state.showPrice}>
                     <TextField
                         id="servicePrice"
                         name="servicePrice"
                         label="Precio"
                         autoComplete="price"
-                        type="number"
+                        type="tel"
                         onChange={this.handleInputNumberChange}
                         InputProps={{
                           startAdornment: <InputAdornment position="start">$</InputAdornment>,
                         }}
                         fullWidth
                       />
-              </Grid>
-            </Zoom>
-          }
+            </Collapse>
+          </Grid>
+          
           <Grid item xs={12} md={6}>
             <AddContacts />
           </Grid>

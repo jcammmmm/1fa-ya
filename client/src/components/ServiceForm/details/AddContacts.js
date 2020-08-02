@@ -16,13 +16,15 @@ class AddContacts extends Component {
     this.state = { 
       contactInputs: [],
       open: false,
-      collapseTimeout: 500
+      collapseTimeout: 500,
+      contactData: { },
     };
     this.toggleValue = this.toggleValue.bind(this);
     this.addInput = this.addInput.bind(this);
     this.setCollapseTimeout = this.setCollapseTimeout.bind(this);
     this.deleteInput = this.deleteInput.bind(this);
     this.createInput = this.createInput.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 
     // This number always increments, ensuring key uniqueness
     this.currCounter = 0;
@@ -43,10 +45,11 @@ class AddContacts extends Component {
     this.setCollapseTimeout(0);
     this.setState(prev => {
       const n = this.currCounter++;
+      const newContactData = prev.contactData;
+      newContactData[n] = '';
       return {
-        contactInputs: [ 
-          n, ...prev.contactInputs 
-        ]
+        contactInputs: [ n, ...prev.contactInputs ],
+        contactData: newContactData
       }
     });
     setTimeout(() => {
@@ -60,18 +63,32 @@ class AddContacts extends Component {
   }
 
   toggleValue(value) {
-    this.setState(() => { return { open: value } })
+    this.setState(() => { return { open: value } });
+  }
+
+  
+  handleInputChange(event, id) {
+    console.log(id);
+    console.log(event.target.value);
+    const value = event.target.value;
+    this.setState((prev) => {
+      const newContactData = prev.contactData;
+      newContactData[id] = value;
+      return { contactData: newContactData };
+    });
+    event.preventDefault();
   }
 
   createInput(collapsable, id) {
     let input = (
       <TextField
-        id="phoneNumber"
-        name="phoneNumber"
+        id={"phoneNumber" + id}
+        name={"phoneNumber" + id}
+        value={this.state.contactData[id]}
+        onChange={event => this.handleInputChange(event, id)}
         label="Teléfono"
         autoComplete="phone"
         type="tel"
-        // onChange={this.handleInputNumberChange}
         InputProps={{
           startAdornment: <InputAdornment position="start">#</InputAdornment>,
         }}
@@ -108,6 +125,7 @@ class AddContacts extends Component {
       </Grid>
     )
   }
+
 
   render() {
     const inputsQtty = this.state.contactInputs.length;
