@@ -1,12 +1,16 @@
+import { Button, Paper, Step, StepConnector, StepContent, StepLabel, Stepper, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import React, { Component, Fragment } from 'react';
-import {withStyles} from '@material-ui/core/styles'
-import { Paper, Typography, Step, Stepper, StepLabel, StepContent, StepConnector, Button } from '@material-ui/core';
-import ServiceFormDetails from './ServiceFormDetails';
-import ServiceFormImages from './ServiceFormImages';
-import ServiceFormOverview from './ServiceFormOverview';
 import { Link } from 'react-router-dom';
+import AddDetails from './details/AddDetails'
+import AddContacts from './contacts/AddContacts'
+import AddSocial from './social/AddSocial'
+import AddImages from './images/AddImages'
+import AddTags from './tags/AddTags'
+import ShowOverview from './overview/ShowOverview'
 
 
+// TODO: Create a post showing how to remove connectors to material ui vertical stepper
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -34,22 +38,34 @@ const styles = theme => ({
   }
 })
 
-const steps = ['Describe tu Servicio', 'Añade imágenes', 'Qué tal queda?']
+const steps = ['Describe tu Servicio',
+               'Añade números de contacto',
+               'Enlaza tus redes sociales',
+               'Sube un par imágenes',
+               'Aparece en las búsquedas añadiendo etiquetas',
+               'Qué tal queda?'
+              ]
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <ServiceFormDetails/>
+      return <AddDetails />
     case 1:
-      return <ServiceFormImages/>
+      return <AddContacts />
     case 2:
-      return <ServiceFormOverview/>
+      return <AddSocial />
+    case 3:
+      return <AddImages />
+    case 4: 
+      return <AddTags />
+    case 5:
+      return <ShowOverview />
     default:
       throw new Error('Unknown step')
   }
 }
 
-class ServiceForm extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,15 +87,15 @@ class ServiceForm extends Component {
     })
   }
 
-  render() { 
+  render() {
     const {classes} = this.props;
     return (
       <main>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5" align="center"> 
+          <Typography component="h1" variant="h5" align="center">
             Agrega lo que ofreces!
           </Typography>
-          <Stepper orientation="vertical" 
+          <Stepper orientation="vertical"
                    activeStep={this.state.activeStep}
                    className={classes.stepper}
                    connector={<StepConnector classes={{ line: classes.stepperLine }}/>}
@@ -127,5 +143,5 @@ class ServiceForm extends Component {
     );
   }
 }
- 
-export default withStyles(styles)(ServiceForm);
+
+export default withStyles(styles)(Form);

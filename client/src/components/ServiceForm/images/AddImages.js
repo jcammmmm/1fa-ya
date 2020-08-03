@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import CarouselUploadedImages from './ServiceFormUploadedImages'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-class ServiceFormImages extends Component {
+class AddImages extends Component {
 
   constructor(props) {
     super(props);
@@ -54,4 +54,4 @@ class ServiceFormImages extends Component {
   }
 }
  
-export default ServiceFormImages;
+export default AddImages;

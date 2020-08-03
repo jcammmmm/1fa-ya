@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import OTPForm from './components/OTPForm';
 import ServiceList from './components/ServiceList';
-import ServiceForm from './components/ServiceForm/ServiceForm';
+import ServiceForm from './components/ServiceForm/Form';
 
 class Mammi extends React.Component {
 

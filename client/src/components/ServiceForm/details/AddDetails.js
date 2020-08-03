@@ -1,29 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Collapse } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
-import withStyles from '@material-ui/core/styles/withStyles'
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import PlusOneIcon from '@material-ui/icons/PlusOne';
-import AddIcon from '@material-ui/icons/Add';
-import { Zoom, Paper, Collapse  } from '@material-ui/core';
-import AddContacts from './details/AddContacts'
-import AddSocial from './details/AddSocial';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import React, { Component, Fragment } from 'react';
 
-const styles = theme => ({
-  checkBox: {
-    '& > .MuiGrid-item': {
-      padding: theme.spacing(0)
-    }
-  }
-});
-
-class ServiceFormDetails extends Component {
+class AddDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -107,7 +90,7 @@ class ServiceFormDetails extends Component {
               label="aceptas intercambios?"
             />
           </Grid>
-          <Grid item xs={7} sm={6}>
+          <Grid item xs={12} sm={6}>
             <FormControlLabel
               control={
                 <Checkbox 
@@ -120,7 +103,7 @@ class ServiceFormDetails extends Component {
               label="publicar precio?"
             />
           </Grid>
-          <Grid item container xs={5} sm={6}>
+          <Grid item container xs={12} sm={6}>
             <Collapse in={this.state.showPrice}>
                     <TextField
                         id="servicePrice"
@@ -136,29 +119,10 @@ class ServiceFormDetails extends Component {
                       />
             </Collapse>
           </Grid>
-          
-          <Grid item xs={12} md={6}>
-            <AddContacts />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <AddSocial />
-          </Grid>
-
-          {/* 
-          <
-          <Grid item xs={12} md={6}>
-            <Button
-              color="secondary"
-              startIcon={<AddIcon />}
-              onClick={this.handleAddContact}
-            >
-              Añadir Etiquetas
-            </Button>
-          </Grid> */}
         </Grid>
       </Fragment>
     );
   }
 }
  
-export default ServiceFormDetails;
+export default AddDetails;
