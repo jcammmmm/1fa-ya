@@ -13,6 +13,7 @@ import PlusOneIcon from '@material-ui/icons/PlusOne';
 import AddIcon from '@material-ui/icons/Add';
 import { Zoom, Paper, Collapse  } from '@material-ui/core';
 import AddContacts from './details/AddContacts'
+import AddSocial from './details/AddSocial';
 
 const styles = theme => ({
   checkBox: {
@@ -140,13 +141,7 @@ class ServiceFormDetails extends Component {
             <AddContacts />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Button
-              color="secondary"
-              startIcon={<AddIcon />}
-              onClick={this.handleAddContact}
-            >
-              Agregar Redes Sociales
-            </Button>
+            <AddSocial />
           </Grid>
 
           {/* 
