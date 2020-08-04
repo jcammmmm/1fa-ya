@@ -6,9 +6,9 @@ import java.util.Optional;
 import com.jcflorezv.unfaya.houseServices.models.Service;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@CrossOrigin("*")
+@RepositoryRestResource(exported = false)
 public interface ServiceRepository extends PagingAndSortingRepository<Service, Long> {
   Service save(Service service);
   Optional<Service> findById(Long id);
