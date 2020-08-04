@@ -46,25 +46,6 @@ const steps = ['Describe tu Servicio',
                'Qué tal queda?'
               ]
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddDetails />
-    case 1:
-      return <AddContacts />
-    case 2:
-      return <AddSocial />
-    case 3:
-      return <AddImages />
-    case 4: 
-      return <AddTags />
-    case 5:
-      return <ShowOverview />
-    default:
-      throw new Error('Unknown step')
-  }
-}
-
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -73,6 +54,8 @@ class Form extends Component {
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
+    this.addSubFormData = this.addSubFormData.bind(this);
+    this.getStepContent = this.getStepContent.bind(this);
   }
 
   handleNext() {
@@ -85,6 +68,29 @@ class Form extends Component {
     this.setState((state) => {
       return {activeStep: state.activeStep - 1}
     })
+  }
+
+  addSubFormData(data, formName) {
+    this.setState(() => ({ [formName]: data }));
+  }
+
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddDetails submitHandler={this.addSubFormData} formName={"details"} />
+      case 1:
+        return <AddContacts submitHandler={this.addSubFormData} formName={"contacts"} />
+      case 2:
+        return <AddSocial submitHandler={this.addSubFormData} formName={"social"} />
+      case 3:
+        return <AddImages submitHandler={this.addSubFormData} formName={"images"} />
+      case 4: 
+        return <AddTags submitHandler={this.addSubFormData} formName={"tags"} />
+      case 5:
+        return <ShowOverview />
+      default:
+        throw new Error('Unknown step')
+    }
   }
 
   render() {
@@ -108,7 +114,7 @@ class Form extends Component {
                 <StepLabel>{label}</StepLabel>
                 <StepContent classes={{ root: classes.stepContent}}>
                   <Fragment>
-                    {getStepContent(index)}
+                    {this.getStepContent(index)}
                   </Fragment>
                   <div>
                     <Button

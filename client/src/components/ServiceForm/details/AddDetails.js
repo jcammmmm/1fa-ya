@@ -50,6 +50,10 @@ class AddDetails extends Component {
     })
   }
 
+  componentWillUnmount() {
+    this.props.submitHandler(this.state, this.props.formName);
+  }
+
   render() { 
     const {classes} = this.props
     return (
