@@ -9,13 +9,7 @@ import React, { Component, Fragment } from 'react';
 class AddDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      serviceName: props.parentState.serviceName,       // string ""
-      serviceDetails: props.parentState.serviceDetails, // string ""
-      servicePrice: props.parentState.servicePrice,     // integer
-      showPrice: props.parentState.showPrice,           // bool
-      tradeable: props.parentState.tradeable            // bool
-    }
+    this.state = this.props.parentState;
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.handleInputNumberChange = this.handleInputNumberChange.bind(this)
     this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this)

@@ -10,7 +10,7 @@ class AddImages extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { images: [] }
+    this.state = this.props.parentState;
     this.onImageChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -39,6 +39,10 @@ class AddImages extends Component {
 
   handleClick(event) {
     this.hiddenFileInput.current.click();
+  }
+
+  componentWillUnmount() {
+    this.props.stateHandler(this.state, this.props.stateName);
   }
 
   // https://medium.com/@masakudamatsu/how-to-customize-the-file-upload-button-in-react-b3866a5973d8

@@ -12,12 +12,7 @@ import React, { Component, Fragment } from "react";
 class AddContacts extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      contactInputs: props.parentState.contactInputs,     // only holds the state of wich input is currently rendered/deleted
-      open: props.parentState.open,                       // applies to the last added input to make the collapse effect
-      collapseTimeout: props.parentState.collapseTimeout, // applies to the last added input to make the collapse effect
-      contactData: props.parentState.contactData,     
-    };
+    this.state = this.props.parentState;
     this.toggleValue = this.toggleValue.bind(this);
     this.addInput = this.addInput.bind(this);
     this.setCollapseTimeout = this.setCollapseTimeout.bind(this);

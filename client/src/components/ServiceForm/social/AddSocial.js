@@ -12,12 +12,7 @@ import React, { Component, Fragment } from "react";
 class AddSocial extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      contactInputs: [],
-      open: false,
-      collapseTimeout: 500,
-      contactData: { },
-    };
+    this.state = this.props.parentState;
     this.toggleValue = this.toggleValue.bind(this);
     this.addInput = this.addInput.bind(this);
     this.setCollapseTimeout = this.setCollapseTimeout.bind(this);
@@ -76,6 +71,10 @@ class AddSocial extends Component {
       return { contactData: newContactData };
     });
     event.preventDefault();
+  }
+
+  componentWillUnmount() {
+    this.props.stateHandler(this.state, this.props.stateName);
   }
 
   createInput(collapsable, id) {

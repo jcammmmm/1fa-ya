@@ -63,6 +63,17 @@ class Form extends Component {
         collapseTimeout: 500, // applies to the last added input to make the collapse effect
         contactData: { },     // this object will finally containt the phone numbers
       },
+      socialState: {
+        contactInputs: [],    
+        open: false,          
+        collapseTimeout: 500, 
+        contactData: { },
+      }, 
+      imagesState: {
+        images: []
+      },
+      tagsState: {
+      }
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -93,11 +104,11 @@ class Form extends Component {
       case 1:
         return <AddContacts stateHandler={this.transferState} stateName={"contactsState"} parentState={this.state.contactsState}/>
       case 2:
-        return <AddSocial stateHandler={this.transferState} stateName={"socialState"} />
+        return <AddSocial stateHandler={this.transferState} stateName={"socialState"} parentState={this.state.socialState} />
       case 3:
-        return <AddImages stateHandler={this.transferState} stateName={"imagesState"} />
+        return <AddImages stateHandler={this.transferState} stateName={"imagesState"} parentState={this.state.imagesState} />
       case 4: 
-        return <AddTags stateHandler={this.transferState} stateName={"tagsState"} />
+        return <AddTags stateHandler={this.transferState} stateName={"tagsState"} parentState={this.state.tagsState} />
       case 5:
         return <ShowOverview />
       default:
