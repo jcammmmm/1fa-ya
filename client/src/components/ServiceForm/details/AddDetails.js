@@ -10,11 +10,11 @@ class AddDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      serviceName: props.data.serviceName,       // string ""
-      serviceDetails: props.data.serviceDetails, // string ""
-      servicePrice: props.data.servicePrice,     // integer
-      showPrice: props.data.showPrice,           // bool
-      tradeable: props.data.tradeable            // bool
+      serviceName: props.parentState.serviceName,       // string ""
+      serviceDetails: props.parentState.serviceDetails, // string ""
+      servicePrice: props.parentState.servicePrice,     // integer
+      showPrice: props.parentState.showPrice,           // bool
+      tradeable: props.parentState.tradeable            // bool
     }
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.handleInputNumberChange = this.handleInputNumberChange.bind(this)
@@ -43,7 +43,7 @@ class AddDetails extends Component {
   }
 
   componentWillUnmount() {
-    this.props.submitHandler(this.state, this.props.formName);
+    this.props.stateHandler(this.state, this.props.stateName);
   }
 
   render() { 

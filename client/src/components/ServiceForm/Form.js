@@ -49,18 +49,24 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 0,
-      details: { // details subform data
+      activeStep: 1,
+      detailsState: { 
         serviceName: "",
         serviceDetails: "",
         servicePrice: "",
         showPrice: false,
         tradeable: false
-      }
+      },
+      contactsState: {
+        contactInputs: [],    // only holds the state of wich input is currently rendered/deleted
+        open: false,          // applies to the last added input to make the collapse effect
+        collapseTimeout: 500, // applies to the last added input to make the collapse effect
+        contactData: { },     // this object will finally containt the phone numbers
+      },
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
-    this.addSubFormData = this.addSubFormData.bind(this);
+    this.transferState = this.transferState.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
   }
 
@@ -76,22 +82,22 @@ class Form extends Component {
     })
   }
 
-  addSubFormData(data, formName) {
-    this.setState(() => ({ [formName]: data }));
+  transferState(stateData, formName) {
+    this.setState(() => ({ [formName]: stateData }));
   }
 
   getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddDetails submitHandler={this.addSubFormData} formName={"details"} data={this.state.details}/>
+        return <AddDetails stateHandler={this.transferState} stateName={"detailsState"} parentState={this.state.detailsState}/>
       case 1:
-        return <AddContacts submitHandler={this.addSubFormData} formName={"contacts"} />
+        return <AddContacts stateHandler={this.transferState} stateName={"contactsState"} parentState={this.state.contactsState}/>
       case 2:
-        return <AddSocial submitHandler={this.addSubFormData} formName={"social"} />
+        return <AddSocial stateHandler={this.transferState} stateName={"socialState"} />
       case 3:
-        return <AddImages submitHandler={this.addSubFormData} formName={"images"} />
+        return <AddImages stateHandler={this.transferState} stateName={"imagesState"} />
       case 4: 
-        return <AddTags submitHandler={this.addSubFormData} formName={"tags"} />
+        return <AddTags stateHandler={this.transferState} stateName={"tagsState"} />
       case 5:
         return <ShowOverview />
       default:

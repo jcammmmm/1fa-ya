@@ -13,10 +13,10 @@ class AddContacts extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      contactInputs: [],
-      open: false,
-      collapseTimeout: 500,
-      contactData: { },
+      contactInputs: props.parentState.contactInputs,     // only holds the state of wich input is currently rendered/deleted
+      open: props.parentState.open,                       // applies to the last added input to make the collapse effect
+      collapseTimeout: props.parentState.collapseTimeout, // applies to the last added input to make the collapse effect
+      contactData: props.parentState.contactData,     
     };
     this.toggleValue = this.toggleValue.bind(this);
     this.addInput = this.addInput.bind(this);
@@ -30,12 +30,20 @@ class AddContacts extends Component {
 
   }
 
-  deleteInput(item) {    
+  deleteInput(item) {  
+
     this.setState((prev) => {
       const newInputs = prev.contactInputs.slice(0);
+      const newData = prev.contactData;
+      
+      delete newData[item];
       const index = newInputs.indexOf(item);
       newInputs.splice(index, 1);
-      return { contactInputs: newInputs }
+
+      return { 
+        contactInputs: newInputs,
+        contactData: newData
+      }
     })
   }
 
@@ -52,7 +60,7 @@ class AddContacts extends Component {
       }
     });
     setTimeout(() => {
-      this.setCollapseTimeout(200);
+      this.setCollapseTimeout(300);
       this.toggleValue(true);
     }, 100)
   }
@@ -67,8 +75,6 @@ class AddContacts extends Component {
 
   
   handleInputChange(event, id) {
-    console.log(id);
-    console.log(event.target.value);
     const value = event.target.value;
     this.setState((prev) => {
       const newContactData = prev.contactData;
@@ -76,6 +82,10 @@ class AddContacts extends Component {
       return { contactData: newContactData };
     });
     event.preventDefault();
+  }
+
+  componentWillUnmount() {
+    this.props.stateHandler(this.state, this.props.stateName);
   }
 
   createInput(collapsable, id) {
@@ -125,11 +135,6 @@ class AddContacts extends Component {
       </Grid>
     )
   }
-
-  componentDidMount() {
-    this.addInput(null);
-  }
-
 
   render() {
     const inputsQtty = this.state.contactInputs.length;
