@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-import CarouselUploadedImages from './ServiceFormUploadedImages'
+import CarouselUploadedImages from './Preview'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 class AddImages extends Component {
@@ -19,14 +19,22 @@ class AddImages extends Component {
 
   handleChange(event) {
     event.preventDefault();
-    // TODO: review
-    if(event.target.files && event.target.files[0]) {
-      let images = [];
-      images.push(URL.createObjectURL(event.target.files[0]));
-      this.setState({
-        images: images
-      })
+
+    let reader = new FileReader();
+    let file = event.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState((prev) => {
+        let newImages = prev.images;
+        newImages.push( {
+          file: file,
+          previewUrl: reader.result
+        });
+        return { images: newImages }
+      });
     }
+
+    reader.readAsDataURL(file)
   }
 
   handleClick(event) {
@@ -37,7 +45,7 @@ class AddImages extends Component {
   render() { 
     return (
     <Fragment>
-      <CarouselUploadedImages/>
+      {this.state.images.length != 0 && <CarouselUploadedImages images={this.state.images} />}
       <Button
         color="secondary"
         onClick={this.handleClick}        

@@ -8,7 +8,7 @@ import AddSocial from './social/AddSocial'
 import AddImages from './images/AddImages'
 import AddTags from './tags/AddTags'
 import ShowOverview from './overview/ShowOverview'
-
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 
 // TODO: Create a post showing how to remove connectors to material ui vertical stepper
 const styles = theme => ({
@@ -69,7 +69,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 0
+      activeStep: 3
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -95,10 +95,13 @@ class Form extends Component {
           <Typography component="h1" variant="h5" align="center">
             Agrega lo que ofreces!
           </Typography>
+          {/* // TODO: https://material-ui.com/components/steppers/#non-linear */}
           <Stepper orientation="vertical"
                    activeStep={this.state.activeStep}
                    className={classes.stepper}
+                  //  The following line aid to remove connector line...
                    connector={<StepConnector classes={{ line: classes.stepperLine }}/>}
+                   nonLinear
           >
             {steps.map((label, index) => (
               <Step key={label}>

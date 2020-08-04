@@ -3,7 +3,7 @@
 REM launch cdn server at port 8000 (default)
 call python -m http.server -h 0.0.0.0
 
-REM start database container
+REM start database container at port 2345
 docker start postgresdb
 
 REM launch backend services at port 8080 (default)

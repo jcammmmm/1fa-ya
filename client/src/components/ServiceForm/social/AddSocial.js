@@ -1,15 +1,11 @@
-import React, { Component, Fragment } from "react";
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Grid from "@material-ui/core/Grid";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook'
-import {faInstagram} from '@fortawesome/free-brands-svg-icons/faInstagram'
-import {faTwitter} from '@fortawesome/free-brands-svg-icons/faTwitter'
+import AddIcon from '@material-ui/icons/Add';
+import React, { Component, Fragment } from "react";
 
 // TODO: https://material-ui.com/components/icons/#font-awesome
 // TODO: https://github.com/FortAwesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
@@ -154,12 +150,9 @@ class AddSocial extends Component {
               <Button
                 color="primary"
                 onClick={this.addInput}
-                startIcon={[<FontAwesomeIcon icon={faFacebook} size="lg" key={1}/>, 
-                            <FontAwesomeIcon icon={faInstagram} size="lg" key={2}/>, 
-                            <FontAwesomeIcon icon={faTwitter} size="lg" key={3}/>]}
+                startIcon={<AddIcon />}
               >
                 Agregar
-                
               </Button>
             </Grid>
       </Grid>

@@ -1,13 +1,12 @@
-import React, { Component, Fragment } from "react";
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AddIcon from '@material-ui/icons/Add';
-import { Fade } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import AddIcon from '@material-ui/icons/Add';
+import React, { Component, Fragment } from "react";
+
 
 
 class AddContacts extends Component {
@@ -53,7 +52,7 @@ class AddContacts extends Component {
       }
     });
     setTimeout(() => {
-      this.setCollapseTimeout(300);
+      this.setCollapseTimeout(200);
       this.toggleValue(true);
     }, 100)
   }
@@ -109,6 +108,7 @@ class AddContacts extends Component {
       wrapper = input;
     }
 
+    // TODO: add a wrapper collapse to the button
     return (
       <Grid container>
         <Grid item xs={8}>
@@ -124,6 +124,10 @@ class AddContacts extends Component {
         </Grid>
       </Grid>
     )
+  }
+
+  componentDidMount() {
+    this.addInput(null);
   }
 
 
@@ -150,10 +154,10 @@ class AddContacts extends Component {
             <Grid item xs={12}>
               <Button
                 color="primary"
-                startIcon={<WhatsAppIcon />}
                 onClick={this.addInput}
+                startIcon={<AddIcon />}
               >
-                Contacto
+                Agregar
               </Button>
             </Grid>
       </Grid>
