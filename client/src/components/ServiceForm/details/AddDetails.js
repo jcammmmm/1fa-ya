@@ -10,19 +10,11 @@ class AddDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      serviceName: "",
-      serviceDetails: "",
-      servicePrice: "",
-      showPrice: false,
-      tradeable: true,
-      tags: [],
-      contacts: [],
-      webUris: [],
-      formControls: {
-        showAddContacts: false,
-        showAddTags: false,
-        showAddWebUris: false
-      }
+      serviceName: props.data.serviceName,       // string ""
+      serviceDetails: props.data.serviceDetails, // string ""
+      servicePrice: props.data.servicePrice,     // integer
+      showPrice: props.data.showPrice,           // bool
+      tradeable: props.data.tradeable            // bool
     }
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.handleInputNumberChange = this.handleInputNumberChange.bind(this)
@@ -64,6 +56,7 @@ class AddDetails extends Component {
               required
               id="serviceName"
               name="serviceName"
+              value={this.state.serviceName}
               label="Nombre"
               fullWidth
               autoComplete="given-name"
@@ -72,8 +65,9 @@ class AddDetails extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="serviceDescription"
-              name="serviceDescription"
+              id="serviceDetails"
+              name="serviceDetails"
+              value={this.state.serviceDetails}
               label="Descripción"
               fullWidth
               multiline
@@ -98,8 +92,8 @@ class AddDetails extends Component {
             <FormControlLabel
               control={
                 <Checkbox 
-                  color="primary" 
-                  name="showPrice" 
+                  color="primary"
+                  name="showPrice"
                   checked={this.state.showPrice} 
                   onChange={this.handleCheckBoxChange}
                 />
@@ -112,6 +106,7 @@ class AddDetails extends Component {
                     <TextField
                         id="servicePrice"
                         name="servicePrice"
+                        value={this.state.servicePrice}
                         label="Precio"
                         autoComplete="price"
                         type="tel"

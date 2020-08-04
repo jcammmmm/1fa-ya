@@ -2,13 +2,12 @@ import { Button, Paper, Step, StepConnector, StepContent, StepLabel, Stepper, Ty
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import AddDetails from './details/AddDetails'
-import AddContacts from './contacts/AddContacts'
-import AddSocial from './social/AddSocial'
-import AddImages from './images/AddImages'
-import AddTags from './tags/AddTags'
-import ShowOverview from './overview/ShowOverview'
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import AddContacts from './contacts/AddContacts';
+import AddDetails from './details/AddDetails';
+import AddImages from './images/AddImages';
+import ShowOverview from './overview/ShowOverview';
+import AddSocial from './social/AddSocial';
+import AddTags from './tags/AddTags';
 
 // TODO: Create a post showing how to remove connectors to material ui vertical stepper
 const styles = theme => ({
@@ -50,7 +49,14 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 3
+      activeStep: 0,
+      details: { // details subform data
+        serviceName: "",
+        serviceDetails: "",
+        servicePrice: "",
+        showPrice: false,
+        tradeable: false
+      }
     }
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -77,7 +83,7 @@ class Form extends Component {
   getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddDetails submitHandler={this.addSubFormData} formName={"details"} />
+        return <AddDetails submitHandler={this.addSubFormData} formName={"details"} data={this.state.details}/>
       case 1:
         return <AddContacts submitHandler={this.addSubFormData} formName={"contacts"} />
       case 2:
