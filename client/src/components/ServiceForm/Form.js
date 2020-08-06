@@ -9,6 +9,8 @@ import ShowOverview from './overview/ShowOverview';
 import AddSocial from './social/AddSocial';
 import AddTags from './tags/AddTags';
 
+import Axios from 'axios';
+
 // TODO: Create a post showing how to remove connectors to material ui vertical stepper
 const styles = theme => ({
   paper: {
@@ -49,7 +51,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 1,
+      activeStep: 4,
       detailsState: { 
         serviceName: "",
         serviceDetails: "",
@@ -73,6 +75,8 @@ class Form extends Component {
         images: []
       },
       tagsState: {
+        tags: [],
+        selected: []          // Tags selected throught the form
       }
     }
     this.handleNext = this.handleNext.bind(this);
@@ -95,6 +99,20 @@ class Form extends Component {
 
   transferState(stateData, formName) {
     this.setState(() => ({ [formName]: stateData }));
+  }
+
+  componentDidMount() {
+    let config = { headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTk3MTg0MDQzLCJpYXQiOjE1OTY1NzkyNDN9.BhqSBh-UrGzMNzPoYj9RzuEioomq8GPJ3_YCxakwOPE'} };
+    Axios.get('http://192.168.1.15:8080/services/tags', config)
+          .then(r => {
+            console.log(r);
+            this.setState(() => ({
+              tagsState: {
+                tags: [{"name":"tag1"},{"name":"tag2"},{"name":"tag3"}]
+              }
+            }));
+          })
+          .catch(e => console.log(e));
   }
 
   getStepContent(step) {
@@ -120,7 +138,7 @@ class Form extends Component {
     const {classes} = this.props;
     return (
       <main>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={11}>
           <Typography component="h1" variant="h5" align="center">
             Agrega lo que ofreces!
           </Typography>

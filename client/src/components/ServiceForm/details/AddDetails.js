@@ -9,7 +9,7 @@ import React, { Component, Fragment } from 'react';
 class AddDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = this.props.parentState;
+    this.state = props.parentState;
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.handleInputNumberChange = this.handleInputNumberChange.bind(this)
     this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this)

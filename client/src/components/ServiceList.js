@@ -26,7 +26,7 @@ class ServiceList extends Component {
   }
 
   componentDidMount() {
-    let config = { headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTk2NTM4OTkwLCJpYXQiOjE1OTY1MDI5OTB9.vG4COJ-VxP8Ivx0WhwsipFsO0XqdLLBkltrZEGuevck'}}
+    let config = { headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTk3MTg0MDQzLCJpYXQiOjE1OTY1NzkyNDN9.BhqSBh-UrGzMNzPoYj9RzuEioomq8GPJ3_YCxakwOPE'}}
     axios.get("http://192.168.1.15:8080/services?size=6", config)
             .then(r => {
               console.log(r)
