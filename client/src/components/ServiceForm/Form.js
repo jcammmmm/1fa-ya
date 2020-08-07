@@ -108,7 +108,7 @@ class Form extends Component {
             console.log(r);
             this.setState(() => ({
               tagsState: {
-                tags: [{"name":"tag1"},{"name":"tag2"},{"name":"tag3"}]
+                tags: r.data
               }
             }));
           })

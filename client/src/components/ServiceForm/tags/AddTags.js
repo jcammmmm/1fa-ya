@@ -1,93 +1,47 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
+/* eslint-disable no-use-before-define */
+import React, {Component} from 'react';
 import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 300,
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    margin: 2,
-  },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
-}));
+export default class AddTags extends Component {
+  constructor(props) {
+    super(props);
+    this.state = props.parentState;
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+  handleChange(value) {
+    this.setState({ selected: value });
+  }
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+  componentWillUnmount() {
+    // Tricky step. Since we are getting the data after the constructor
+    // is called, the tags in subsequent renderings will be an empty array.
+    // So we override this behavior by sending the array of tags here.
+    let data = { selected: this.state.selected, tags: this.props.parentState.tags };
+    this.props.stateHandler(data , this.props.stateName);
+  }
 
-export default function AddTag(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [selected, setSelected] = React.useState(props.parentState.selected);
-
-  const handleChange = (event) => {
-    setSelected(event.target.value);
-  };
-
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
-          <Select
-            labelId="demo-mutiple-chip-label"
-            id="demo-mutiple-chip"
-            multiple
-            value={selected}
-            onChange={handleChange}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={(selected) => (
-              <div className={classes.chips}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} className={classes.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
-          >
-            {props.parentState.tags.map((tag) => (
-              <MenuItem key={tag.name} value={tag.name}>
-                {/* <Checkbox checked={selected.indexOf(tag.name) > -1} /> */}
-                <ListItemText primary={tag.name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-  );
+  render() {
+    return (
+        <Autocomplete
+          multiple
+          id="tags-standard"
+          options={this.props.parentState.tags}
+          getOptionLabel={(option) => option.name}
+          value={this.state.selected}
+          onChange={(event, value) => this.handleChange(value)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Etiquetas para tu servicio"
+              placeholder="Escribe aquí"
+            />
+          )}
+        />
+    );
+  }
 }
