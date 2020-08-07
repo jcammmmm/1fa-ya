@@ -51,7 +51,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 4,
+      activeStep: 5,
       detailsState: { 
         serviceName: "",
         serviceDetails: "",
@@ -168,7 +168,7 @@ class Form extends Component {
                       color="primary"
                       onClick={this.handleNext}
                     >
-                      Siguiente
+                      {this.state.activeStep === steps.length - 1 ? 'Me gusta' : 'Siguiente'}
                     </Button>
                   </div>
                 </StepContent>
