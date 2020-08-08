@@ -12,7 +12,7 @@ const styles = theme => ({
 class ShowOverview extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = props.parentState;
     this.serviceData = {
       "id": 1,
       "name": "Tovepa taxiva.",
@@ -94,6 +94,7 @@ class ShowOverview extends Component {
     return ( 
       <Grid container className={classes.formCompiled}>
         <Grid item xs={12}>
+          {/* <Service service={this.state} /> */}
           <Service service={this.serviceData} />
         </Grid> 
       </Grid>

@@ -41,7 +41,7 @@ const styles = {
   },
 }
 
-class RecipeReviewCard extends Component {
+class ServiceDetails extends Component {
 
   constructor(props) {
     super(props)
@@ -58,8 +58,7 @@ class RecipeReviewCard extends Component {
   };
   
   render() {
-    // const { classes } = this.props;
-    const classes = this.props.classes; // does the same thing as above
+    const classes = this.props.classes;
     const svc = this.props.service;
 
     return (
@@ -138,4 +137,4 @@ class RecipeReviewCard extends Component {
   }
 }
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(ServiceDetails);
