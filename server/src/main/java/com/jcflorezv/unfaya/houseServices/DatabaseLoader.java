@@ -51,9 +51,9 @@ public class DatabaseLoader implements CommandLineRunner {
     Random rnd = new Random();
     ArrayList<String> tagNames = getTagNames();
 
-    User user1 = new User("user1", "pass1");
-    User user2 = new User("user2", "pass2");
-    User user3 = new User("user3", "pass3");
+    User user1 = new User("user" + rnd.nextInt(999999), "pass");
+    User user2 = new User("user" + rnd.nextInt(999999), "pass");
+    User user3 = new User("user" + rnd.nextInt(999999), "pass");
 
     House house1 = new House();
     House house2 = new House();
@@ -78,13 +78,13 @@ public class DatabaseLoader implements CommandLineRunner {
     house2.setServices(Arrays.asList(svcs[3], svcs[4], svcs[5]));
     house3.setServices(Arrays.asList(svcs[6], svcs[7], svcs[8]));
 
-    user1.setHouse(house1);
-    user2.setHouse(house2);
-    user3.setHouse(house3);
-    
-    urepo.save(user1);
-    urepo.save(user2);
-    urepo.save(user3);
+    house1.setUser(user1);
+    house2.setUser(user2);
+    house3.setUser(user3);
+
+    hrepo.save(house1);
+    hrepo.save(house2);
+    hrepo.save(house3);
   }
 
   private ArrayList<String> getTagNames() {

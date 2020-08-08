@@ -6,14 +6,14 @@ import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +21,9 @@ import me.xdrop.jrand.JRand;
 
 @Entity
 public class House {
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
   @Getter @Setter private Long id;
-  @Getter @Setter private String name;
+  @Getter @Setter private String name; 
   @Getter @Setter private String mainPhoto; // image url
   @Getter @Setter private String location;  // image url
   @Getter @Setter private String address;  // image url
@@ -33,6 +33,10 @@ public class House {
   @JoinColumn(name = "house_id")
   @JsonBackReference
   @Getter @Setter private List<Service> services = new ArrayList<>();
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @MapsId // This makes not null ;)
+  @Getter @Setter private User user; 
 
   public House() {
     Random rnd = new Random();

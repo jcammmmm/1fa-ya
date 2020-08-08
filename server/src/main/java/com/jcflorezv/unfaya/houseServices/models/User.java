@@ -3,11 +3,11 @@ package com.jcflorezv.unfaya.houseServices.models;
 import java.util.Arrays;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,26 +15,26 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="\"User\"")
+@NoArgsConstructor
 public class User implements UserDetails {
 
   @Transient
   private static final long serialVersionUID = 1213659374143541774L;
 
-  @Id
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter @Setter private Long id;
-          @Setter private String userName;
+
+  @Column(unique = true)
+          @Setter private String username;
   @Getter @Setter private String password;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @MapsId
-  @Getter @Setter private House house;
-
-  public User(String userName, String pwd) {
-    this.userName = userName;
+  public User(String username, String pwd) {
+    this.username = username;
     this.password = pwd;
   }
 
@@ -45,7 +45,7 @@ public class User implements UserDetails {
 
   @Override
   public String getUsername() {
-    return this.userName;
+    return this.username;
   }
 
   @Override
