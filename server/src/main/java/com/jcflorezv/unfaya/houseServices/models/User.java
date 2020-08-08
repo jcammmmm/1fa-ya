@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,7 +42,8 @@ public class User implements UserDetails {
     mappedBy = "user",
     cascade = CascadeType.ALL,
     fetch = FetchType.LAZY  
-  )  
+  )
+  @JsonManagedReference 
   @Getter         private House house;
 
   public User(String username, String pwd) {

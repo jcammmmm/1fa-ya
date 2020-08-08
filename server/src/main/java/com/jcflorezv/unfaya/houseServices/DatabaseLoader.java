@@ -1,8 +1,6 @@
 package com.jcflorezv.unfaya.houseServices;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -49,7 +47,7 @@ public class DatabaseLoader implements CommandLineRunner {
   }
 
   private void storeUsersAndHouses() {
-    User user1 = new User("user1", "pass");
+    User user1 = new User("user", "pass");
     User user2 = new User("user2", "pass");
     User user3 = new User("user3", "pass");
 

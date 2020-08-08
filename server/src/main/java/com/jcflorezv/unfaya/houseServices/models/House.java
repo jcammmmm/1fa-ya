@@ -36,6 +36,7 @@ public class House {
 
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId // This makes not null ;)
+  @JsonBackReference
   @Getter @Setter private User user; 
 
   public House() {
