@@ -32,7 +32,7 @@ public class House {
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "house_id")
   @JsonBackReference
-  @Getter @Setter private List<Service> services = new ArrayList<>();
+  @Getter         private List<Service> services = new ArrayList<>();
 
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId // This makes not null ;)
@@ -47,5 +47,15 @@ public class House {
 
     String[] crclldiag = {"Cr", "Cll"};
     this.address = crclldiag[rnd.nextInt(2)] + " " + (rnd.nextInt(67) + 1) + " # " + (rnd.nextInt(67) + 1) + " - " + (rnd.nextInt(67) + 1);
+  }
+
+  public void addService(Service service) {
+    services.add(service);
+    service.setHouse(this);
+  }
+
+  public void removeService(Service service) {
+    services.remove(service);
+    service.setHouse(null);
   }
 }

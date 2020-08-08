@@ -2,6 +2,7 @@ package com.jcflorezv.unfaya.houseServices;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,7 @@ public class DatabaseLoader implements CommandLineRunner {
   @Transactional // https://stackoverflow.com/questions/40247030/detached-entity-passed-to-persist-in-spring-data
   public void run(String... args) throws Exception {
     storeTags();
+    storeUsersAndHouses();
     storeEverythingElse();    
   }
 
@@ -46,19 +48,29 @@ public class DatabaseLoader implements CommandLineRunner {
     }
   }
 
+  private void storeUsersAndHouses() {
+    User user1 = new User("user1", "pass");
+    User user2 = new User("user2", "pass");
+    User user3 = new User("user3", "pass");
+
+    House house1 = new House();
+    House house2 = new House();
+    House house3 = new House();
+
+    user1.setHouse(house1);
+    user2.setHouse(house2);
+    user3.setHouse(house3);
+    
+    urepo.save(user1);
+    urepo.save(user2);
+    urepo.save(user3);
+  }
+
   private void storeEverythingElse() {
 
     Random rnd = new Random();
     ArrayList<String> tagNames = getTagNames();
 
-    User user1 = new User("user" + rnd.nextInt(999999), "pass");
-    User user2 = new User("user" + rnd.nextInt(999999), "pass");
-    User user3 = new User("user" + rnd.nextInt(999999), "pass");
-
-    House house1 = new House();
-    House house2 = new House();
-    House house3 = new House();
-  
     Tag tag1 = trepo.findByName(tagNames.get(rnd.nextInt(tagNames.size())));
     Tag tag2 = trepo.findByName(tagNames.get(rnd.nextInt(tagNames.size())));
     Tag tag3 = trepo.findByName(tagNames.get(rnd.nextInt(tagNames.size())));
@@ -71,20 +83,22 @@ public class DatabaseLoader implements CommandLineRunner {
       svcs[i].addTag(tag3);
     }
 
-    for(Service s : svcs)
-      srepo.save(s);
-    
-    house1.setServices(Arrays.asList(svcs[0], svcs[1], svcs[2]));
-    house2.setServices(Arrays.asList(svcs[3], svcs[4], svcs[5]));
-    house3.setServices(Arrays.asList(svcs[6], svcs[7], svcs[8]));
+    for(Service svc : svcs)
+      srepo.save(svc);
 
-    house1.setUser(user1);
-    house2.setUser(user2);
-    house3.setUser(user3);
+    House house1 = hrepo.findById(1L);
+    House house2 = hrepo.findById(2L);
+    House house3 = hrepo.findById(3L);
 
-    hrepo.save(house1);
-    hrepo.save(house2);
-    hrepo.save(house3);
+    house1.addService(svcs[0]);
+    house1.addService(svcs[1]);
+    house1.addService(svcs[2]);
+    house2.addService(svcs[3]);
+    house2.addService(svcs[4]);
+    house2.addService(svcs[5]);
+    house3.addService(svcs[6]);
+    house3.addService(svcs[7]);
+    house3.addService(svcs[8]);
   }
 
   private ArrayList<String> getTagNames() {
@@ -152,5 +166,10 @@ public class DatabaseLoader implements CommandLineRunner {
 
     return tagNames;
   }
-  
+ 
+  private ArrayList<User> getSampleUsers() {
+    ArrayList<User> users = new ArrayList<User>();
+    users.add(new User());
+    return users;
+  }
 }

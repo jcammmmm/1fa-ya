@@ -1,12 +1,11 @@
 package com.jcflorezv.unfaya.houseServices.controllers;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.jcflorezv.unfaya.houseServices.models.Service;
-import com.jcflorezv.unfaya.houseServices.repositories.ServiceRepository;
+import com.jcflorezv.unfaya.houseServices.models.House;
+import com.jcflorezv.unfaya.houseServices.models.User;
+import com.jcflorezv.unfaya.houseServices.repositories.HouseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,19 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class HouseController {
 
   @Autowired
-  private ServiceRepository serviceRepo;
-  
-  // TODO Replace this by House entities
-  @GetMapping("/allServices")
-  public List<Service> findAllServices() {
-    List<Service> svcs = serviceRepo.findAll();
-    return svcs;
+  private HouseRepository houseRepo;
+
+  @GetMapping("/houses/my")
+  public House currentUserHouseData() {
+    User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return null;
   }
   
-  // TODO Replace this by House entities
-  @GetMapping("/firstService")
-  public Service findFirstService() {
-    Optional<Service> svc = serviceRepo.findById(1L);
-    return svc.get();
-  }
 } 
