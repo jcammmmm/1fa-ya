@@ -43,7 +43,7 @@ public class User implements UserDetails {
     cascade = CascadeType.ALL,
     fetch = FetchType.LAZY  
   )
-  @JsonManagedReference 
+  @JsonManagedReference(value = "house_user_ref") 
   @Getter         private House house;
 
   public User(String username, String pwd) {

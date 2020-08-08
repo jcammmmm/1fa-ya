@@ -43,7 +43,7 @@ public class Service {
     fetch = FetchType.EAGER
   )
   @JoinColumn(name = "house_id")
-  @JsonManagedReference
+  @JsonManagedReference(value = "house_services_ref")
   @Getter @Setter private House house;
 
   @ManyToMany( cascade = {
@@ -55,7 +55,7 @@ public class Service {
     joinColumns = @JoinColumn(name = "service_id"),
     inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
-  @JsonManagedReference
+  @JsonManagedReference(value = "tagsReference")
   @Getter @Setter private Set<Tag> tags = new HashSet<>(); // https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

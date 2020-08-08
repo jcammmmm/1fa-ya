@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @CrossOrigin("*")
@@ -39,5 +43,11 @@ public class ServiceController {
   public List<Tag> getAllTags() {
     return tagRepository.findAll();
   }
+
+  @PostMapping(value="/services", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public Service postService(@RequestBody Service service) {
+      return service;
+  }
+  
 
 }

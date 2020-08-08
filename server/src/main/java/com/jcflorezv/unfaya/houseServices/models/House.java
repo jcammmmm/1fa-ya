@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,12 +32,12 @@ public class House {
   // https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "house_id")
-  @JsonBackReference
+  @JsonBackReference(value = "house_services_ref")
   @Getter         private List<Service> services = new ArrayList<>();
 
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId // This makes not null ;)
-  @JsonBackReference
+  @JsonBackReference(value = "house_user_ref")
   @Getter @Setter private User user; 
 
   public House() {
