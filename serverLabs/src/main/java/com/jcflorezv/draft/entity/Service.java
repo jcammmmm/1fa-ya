@@ -9,10 +9,12 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
 public class Service {
 
   @Id
@@ -29,4 +31,9 @@ public class Service {
   @Setter
   @ManyToOne
   private House house;
+
+  public Service(String name, House house) {
+    this.name = name;
+    this.house = house; 
+  }
 }
