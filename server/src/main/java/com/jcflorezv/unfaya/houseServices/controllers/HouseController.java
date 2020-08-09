@@ -15,5 +15,4 @@ public class HouseController {
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return user.getHouse();
   }
-  
 } 

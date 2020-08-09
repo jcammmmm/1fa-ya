@@ -1,10 +1,10 @@
 package com.jcflorezv.draft.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,11 +29,30 @@ public class Service {
 
   @Getter
   @Setter
-  @ManyToOne
+  @ManyToOne(
+    fetch = FetchType.LAZY
+  )
   private House house;
 
   public Service(String name, House house) {
     this.name = name;
     this.house = house; 
+  }
+
+  @Override
+  public boolean equals(Object o) {
+      if (this == o)
+          return true;
+           
+      if (!(o instanceof Service))
+          return false;
+           
+      return
+          id != null && id.equals(((Service) o).getId());
+  }
+  
+  @Override
+  public int hashCode() {
+      return 31;
   }
 }

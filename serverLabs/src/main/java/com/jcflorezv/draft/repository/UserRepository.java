@@ -1,9 +1,7 @@
 package com.jcflorezv.draft.repository;
 
-import com.jcflorezv.draft.entity.User;
-
-import org.springframework.data.repository.Repository;
-
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+@RepositoryRestResource(exported = false)
 public interface UserRepository { // extends Repository<User, Long> {
   
 }
