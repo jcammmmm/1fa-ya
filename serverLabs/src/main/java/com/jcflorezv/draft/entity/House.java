@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +31,6 @@ public class House {
   private String address;
 
   @Getter
-  @Setter
   @OneToMany(
     mappedBy = "house",
     fetch = FetchType.LAZY

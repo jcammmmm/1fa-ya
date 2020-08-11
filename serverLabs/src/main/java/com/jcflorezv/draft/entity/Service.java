@@ -1,25 +1,31 @@
 package com.jcflorezv.draft.entity;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Service {
 
   @Id
   @Getter
-  @JsonIgnore
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
@@ -32,11 +38,46 @@ public class Service {
   @ManyToOne(
     fetch = FetchType.LAZY
   )
+  @JsonIgnore
   private House house;
 
-  public Service(String name, House house) {
-    this.name = name;
-    this.house = house; 
+  @Getter
+  @OneToMany(
+    fetch = FetchType.LAZY,
+    mappedBy = "service",
+    cascade = CascadeType.ALL
+  )
+  private List<Phonenumber> phonenumbers = new LinkedList<>();
+
+  public void setPhonenumbers(List<Phonenumber> phonenumbers) {
+    // since this is a setter method we clean the field and set 
+    // to a new one. Here we clear the field carefully, removing the phonenumber's
+    // parent link and clearing the phonenumber list.
+    this.phonenumbers.forEach(phonenumber -> phonenumber.setService(null)); 
+    this.phonenumbers.clear();
+
+    // Then we add the phone numbers using the hibernate sync method addPhone.
+    phonenumbers.forEach(this::addPhoneNumber);
+  }
+
+  public void addPhoneNumber(Phonenumber phonenumber) {
+    this.phonenumbers.add(phonenumber);
+    phonenumber.setService(this);
+  }
+
+  public void removePhonenumber(Phonenumber phonenumber) {
+    this.phonenumbers.remove(phonenumber);
+    phonenumber.setService(null);
+  }
+
+  /**
+   * TODO:
+   * Do this with reflection api
+   */
+  public Service updateService(Service service) {
+    setName(service.getName());
+    setPhonenumbers(service.getPhonenumbers());
+    return this;
   }
 
   @Override
