@@ -10,6 +10,7 @@ import com.jcflorezv.draft.entity.House;
 import com.jcflorezv.draft.entity.Service;
 import com.jcflorezv.draft.repository.HouseRepository;
 import com.jcflorezv.draft.repository.ServiceRepository;
+import com.jcflorezv.draft.service.ServiceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
@@ -28,6 +29,9 @@ public class ServiceController {
   HouseRepository houseRepository;
 
   @Autowired
+  ServiceService serviceService;
+
+  @Autowired
   ServiceRepository serviceRepository;
 
   /**
@@ -38,13 +42,7 @@ public class ServiceController {
    */
   @PostMapping("/services")
   public Service createService(@RequestBody Service service) {
-    Long houseId = 3L; // getCurrentContext().getAuthentication().getPersonal().getHouse().getHouseId();
-    // Optional<House> result = houseRepository.findById(houseId);
-    // House house = result.get();
-    House house = houseRepository.findAll().iterator().next();
-    house.addService(service);
-
-    return serviceRepository.save(service);
+    return serviceService.create(service);
   }
 
   @GetMapping("/services")

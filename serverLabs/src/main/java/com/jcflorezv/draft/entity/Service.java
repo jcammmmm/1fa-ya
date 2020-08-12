@@ -64,6 +64,16 @@ public class Service {
   )
   private Set<Tag> tags = new HashSet<>();
 
+  /**
+   * TODO:
+   * Do this with reflection api
+   */
+  public Service updateService(Service service) {
+    setName(service.getName());
+    setPhonenumbers(service.getPhonenumbers());
+    return this;
+  }
+
   public void setPhonenumbers(List<Phonenumber> phonenumbers) {
     // since this is a setter method we clean the field and set 
     // to a new one. Here we clear the field carefully, removing the phonenumber's
@@ -83,16 +93,6 @@ public class Service {
   public void removePhonenumber(Phonenumber phonenumber) {
     this.phonenumbers.remove(phonenumber);
     phonenumber.setService(null);
-  }
-
-  /**
-   * TODO:
-   * Do this with reflection api
-   */
-  public Service updateService(Service service) {
-    setName(service.getName());
-    setPhonenumbers(service.getPhonenumbers());
-    return this;
   }
 
   public void addTag(Tag tag) {

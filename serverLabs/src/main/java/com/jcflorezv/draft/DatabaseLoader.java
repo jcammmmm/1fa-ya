@@ -34,6 +34,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
   private static ArrayList<String> getTagNames() {
     ArrayList<String> tagNames = new ArrayList<>();
+    tagNames.add("Untagged");
     tagNames.add("Restauración Calzado");
     tagNames.add("Fabricación Calzado");
     tagNames.add("Calzado a la Medida");
