@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.jcflorezv.draft.dto.ServiceDto;
 import com.jcflorezv.draft.entity.House;
-import com.jcflorezv.draft.entity.Phonenumber;
 import com.jcflorezv.draft.entity.Service;
 import com.jcflorezv.draft.repository.HouseRepository;
 import com.jcflorezv.draft.repository.ServiceRepository;
