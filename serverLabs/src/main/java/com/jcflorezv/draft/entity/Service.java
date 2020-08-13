@@ -55,6 +55,7 @@ public class Service {
   private List<Phonenumber> phonenumbers = new LinkedList<>();
 
   @Getter
+  @Setter
   @ManyToMany(
     cascade = {CascadeType.PERSIST, CascadeType.MERGE}
   )
@@ -63,16 +64,6 @@ public class Service {
     inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
   private Set<Tag> tags = new HashSet<>();
-
-  /**
-   * TODO:
-   * Do this with reflection api
-   */
-  public Service updateService(Service service) {
-    setName(service.getName());
-    setPhonenumbers(service.getPhonenumbers());
-    return this;
-  }
 
   public void setPhonenumbers(List<Phonenumber> phonenumbers) {
     // since this is a setter method we clean the field and set 
@@ -94,7 +85,7 @@ public class Service {
     this.phonenumbers.remove(phonenumber);
     phonenumber.setService(null);
   }
-
+  
   public void addTag(Tag tag) {
     tags.add(tag);
     tag.getServices().add(this);

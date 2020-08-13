@@ -86,9 +86,7 @@ public class ServiceController {
 
   @PutMapping("/services/{id}")
   public Service repService(@PathVariable("id") Long id, @RequestBody Service newService) {
-    Service oldService = serviceRepository.findById(id).get();
-    Service updatedService = oldService.updateService(newService);  
-    return serviceRepository.save(updatedService);
+    return serviceService.replace(id, newService);
   }
 
   @GetMapping("/services/{id}/house") 

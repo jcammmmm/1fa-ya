@@ -42,11 +42,17 @@ public class ServiceService {
     House house = houseRepository.findAll().iterator().next();
     house.addService(service);
 
-    Service taggedService = associateEntityTags(service);
+    Service taggedService = applyTags(service);
     return serviceRepository.save(taggedService);
   }
 
-  private Service associateEntityTags(Service service) {
+  public Service replace(Long id, Service newService) {
+    Service currService = serviceRepository.findById(id).get();
+    Service updatedService = updateService(currService, newService);
+    return serviceRepository.save(updatedService);
+  }
+
+  private Service applyTags(Service service) {
     Set<Tag> unassociatedTags = service.getTags();
     List<Tag> catalog = ImmutableList.copyOf(tagRepository.findAll());
     Set<Tag> bindedTags = new HashSet<>();
@@ -65,5 +71,18 @@ public class ServiceService {
     bindedTags.forEach(service::addTag);
 
     return service;
+  }
+
+  /**
+   * TODO:
+   * Do this with reflection api
+   * 
+   * This method preserves relationships House.
+   */
+  private Service updateService(Service currService, Service newService) {
+    currService.setName(newService.getName());
+    currService.setPhonenumbers(newService.getPhonenumbers());
+    currService.setTags(applyTags(newService).getTags());
+    return currService;
   }
 }
