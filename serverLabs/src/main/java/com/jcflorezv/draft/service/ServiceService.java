@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import com.google.common.collect.ImmutableList;
 import com.jcflorezv.draft.entity.House;
 import com.jcflorezv.draft.entity.Service;
@@ -14,6 +18,7 @@ import com.jcflorezv.draft.repository.TagRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+ @Transactional
 @org.springframework.stereotype.Service
 public class ServiceService {
 
@@ -25,6 +30,10 @@ public class ServiceService {
 
   @Autowired
   ServiceRepository serviceRepository;
+
+  @PersistenceContext
+  EntityManager entityManager;
+
   
   public Service create(Service service) {
     Long houseId = 3L; // getCurrentContext().getAuthentication().getPersonal().getHouse().getHouseId();
@@ -48,6 +57,7 @@ public class ServiceService {
       .findAny()
       .orElse(catalog.get(0));
       
+      tag = entityManager.merge(tag);
       bindedTags.add(tag);
     });
     
