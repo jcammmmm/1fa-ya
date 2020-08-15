@@ -41,7 +41,7 @@ public class Service {
   @Getter
   @Setter
   @ManyToOne(
-    fetch = FetchType.EAGER
+    fetch = FetchType.LAZY
   )
   @JsonIgnore
   private House house;

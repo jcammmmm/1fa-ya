@@ -12,8 +12,10 @@ import com.jcflorezv.draft.repository.HouseRepository;
 import com.jcflorezv.draft.repository.ServiceRepository;
 import com.jcflorezv.draft.service.ServiceService;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -92,8 +94,12 @@ public class ServiceController {
   @GetMapping("/services/{id}/house") 
   public House getHouse(@PathVariable("id") Long serviceId) {
     Optional<Service> result = serviceRepository.findById(serviceId);
-    Service svc = result.get();
-    House house = svc.getHouse();
+    House house = Hibernate.unproxy(result.get().getHouse(), House.class);
     return house;
+  }
+
+  @DeleteMapping("/services/{id}")
+  public Service deleteHouse(@PathVariable("id") Long serviceId) {
+    return null;
   }
 }

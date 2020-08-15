@@ -43,6 +43,7 @@ public class ServiceService {
     house.addService(service);
 
     Service taggedService = applyTags(service);
+    houseRepository.save(house);
     return serviceRepository.save(taggedService);
   }
 
