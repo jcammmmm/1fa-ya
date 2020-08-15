@@ -86,4 +86,14 @@ public class ServiceService {
     currService.setTags(applyTags(newService).getTags());
     return currService;
   }
+
+  public void delete(Long serviceId) {
+    // update relationships
+    House house = houseRepository.findAll().iterator().next();
+    Service service = serviceRepository.findById(serviceId).get(); // proxy entity
+    house.removeService(service);
+    //persist
+    houseRepository.save(house);
+    serviceRepository.delete(service);
+  }
 }

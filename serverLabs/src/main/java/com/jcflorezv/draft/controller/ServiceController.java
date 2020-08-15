@@ -99,7 +99,7 @@ public class ServiceController {
   }
 
   @DeleteMapping("/services/{id}")
-  public Service deleteHouse(@PathVariable("id") Long serviceId) {
-    return null;
+  public void deleteHouse(@PathVariable("id") Long serviceId) {
+    serviceService.delete(serviceId);
   }
 }
