@@ -55,6 +55,14 @@ public class Service {
   private List<Phonenumber> phonenumbers = new LinkedList<>();
 
   @Getter
+  @OneToMany(
+    fetch = FetchType.LAZY,
+    mappedBy = "service",
+    cascade = CascadeType.ALL
+  )
+  private List<Photo> photos = new LinkedList<>();
+
+  @Getter
   @Setter
   @ManyToMany(
     cascade = {CascadeType.PERSIST, CascadeType.MERGE}
@@ -94,6 +102,27 @@ public class Service {
   public void removeTag(Tag tag) {
       tags.remove(tag);
       tag.getServices().remove(this);
+  }
+
+  public void setPhotos(List<Photo> photos) {
+    // since this is a setter method we clean the field and set 
+    // to a new one. Here we clear the field carefully, removing the phonenumber's
+    // parent link and clearing the phonenumber list.
+    this.photos.forEach(photo -> photo.setService(null)); 
+    this.photos.clear();
+
+    // Then we add the phone numbers using the hibernate sync method addPhone.
+    photos.forEach(this::addPhoto);
+  }
+
+  public void addPhoto(Photo photo) {
+    photos.add(photo);
+    photo.setService(this);
+  }
+
+  public void removePhoto(Photo photo) {
+    photos.remove(photo);
+    photo.setService(null);
   }
 
   @Override
