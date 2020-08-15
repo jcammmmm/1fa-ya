@@ -92,8 +92,8 @@ public class ServiceController {
   @GetMapping("/services/{id}/house") 
   public House getHouse(@PathVariable("id") Long serviceId) {
     Optional<Service> result = serviceRepository.findById(serviceId);
-    House house = result.get().getHouse();
+    Service svc = result.get();
+    House house = svc.getHouse();
     return house;
   }
-
 }
