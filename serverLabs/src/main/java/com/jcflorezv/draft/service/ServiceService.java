@@ -96,4 +96,11 @@ public class ServiceService {
     houseRepository.save(house);
     serviceRepository.delete(service);
   }
+
+  public void addViewCount(Long serviceId) {
+    Service service = serviceRepository.findById(serviceId).get();
+    Long currViewCount = service.getViewCount();
+    service.setViewCount(++currViewCount);
+    serviceRepository.save(service);
+  }
 }

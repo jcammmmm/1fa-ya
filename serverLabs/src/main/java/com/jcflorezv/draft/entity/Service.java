@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +39,11 @@ public class Service {
   @Getter
   @Setter
   private String name;
+
+  @Getter
+  @Setter
+  @JsonProperty(access = Access.READ_ONLY)
+  private Long viewCount = 0L;
 
   @Getter
   @Setter

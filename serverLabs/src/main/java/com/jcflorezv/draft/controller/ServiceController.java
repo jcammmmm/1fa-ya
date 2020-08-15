@@ -102,4 +102,9 @@ public class ServiceController {
   public void deleteHouse(@PathVariable("id") Long serviceId) {
     serviceService.delete(serviceId);
   }
+
+  @PostMapping("/services/{id}/updateViewCount")
+  public void addOneViewCount(@PathVariable("id") Long serviceId) {
+    serviceService.addViewCount(serviceId);
+  }
 }
