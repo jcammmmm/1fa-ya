@@ -18,9 +18,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const tempImg = "http://192.168.1.15:8000/images/fastfood/2.jpg";
 
-const styles = {
+const styles = theme => ({
   root: {
     maxWidth: 345,
+    minWidth: 345
   },
   media: {
     height: 0,
@@ -29,9 +30,9 @@ const styles = {
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
-    // transition: theme.transitions.create('transform', {
-    //   duration: theme.transitions.duration.shortest,
-    // }),
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
@@ -39,7 +40,7 @@ const styles = {
   avatar: {
     backgroundColor: red[500],
   },
-}
+})
 
 class ServiceDetails extends Component {
 

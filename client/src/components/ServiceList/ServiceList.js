@@ -31,7 +31,7 @@ class ServiceList extends Component {
             .then(r => {
               console.log(r)
               this.setState({ 
-                services: r.data._embedded.services 
+                services: r.data 
               }); 
             })
             .catch(e => console.log(e));

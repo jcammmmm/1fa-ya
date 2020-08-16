@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Service from '../../Service'
+import Service from '../../ServiceList/Service'
 import { Grid } from '@material-ui/core';
 
 const styles = theme => ({
