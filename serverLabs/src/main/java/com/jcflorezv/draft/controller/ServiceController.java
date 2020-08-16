@@ -15,6 +15,7 @@ import com.jcflorezv.draft.service.ServiceService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin("*")
 public class ServiceController {
 
   @Autowired
@@ -50,7 +52,11 @@ public class ServiceController {
   @GetMapping("/services")
   public List<Service> getServices() {
     List<Service> services = new LinkedList<>();
-    serviceRepository.findAll().forEach(services::add);
+    serviceRepository.findAll().forEach(service -> {
+      House house = Hibernate.unproxy(service.getHouse(), House.class); 
+      service.setHouse(house);
+      services.add(service);
+    });
     return services;
   }
   
