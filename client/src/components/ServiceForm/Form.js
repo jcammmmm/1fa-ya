@@ -51,7 +51,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 5,
+      activeStep: 1,
       myHouse: {},
       detailsState: { 
         serviceName: "",
@@ -61,10 +61,7 @@ class Form extends Component {
         tradeable: false
       },
       contactsState: {
-        contactInputs: [],    // only holds the state of wich input is currently rendered/deleted
-        open: false,          // applies to the last added input to make the collapse effect
-        collapseTimeout: 500, // applies to the last added input to make the collapse effect
-        contactData: { },     // this object will finally contain the phone numbers
+        contactData: [ {"number": ""}, {"number": ""}, {"number": ""}]
       },
       socialState: {
         contactInputs: [],    
@@ -88,7 +85,7 @@ class Form extends Component {
     this.sparceArrayToList = this.sparceArrayToList.bind(this);
     this.getSampleState = this.getSampleState.bind(this);
 
-    this.state = this.getSampleState();
+    // this.state = this.getSampleState();
   }
 
   handleNext() {
@@ -176,7 +173,7 @@ class Form extends Component {
 
   getSampleState() {
     return {
-      "activeStep": 4,
+      "activeStep": 1,
       "myHouse": {
         "id": 1,
         "name": "Vi.",

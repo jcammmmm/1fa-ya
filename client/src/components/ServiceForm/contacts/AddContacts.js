@@ -7,73 +7,19 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import React, { Component, Fragment } from "react";
 
-
-
 class AddContacts extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.parentState;
-    this.toggleValue = this.toggleValue.bind(this);
-    this.addInput = this.addInput.bind(this);
-    this.setCollapseTimeout = this.setCollapseTimeout.bind(this);
-    this.deleteInput = this.deleteInput.bind(this);
-    this.createInput = this.createInput.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
-    // This number always increments, ensuring key uniqueness
-    this.currCounter = 0;
-
   }
 
-  deleteInput(item) {  
-
-    this.setState((prev) => {
-      const newInputs = prev.contactInputs.slice(0);
-      const newData = prev.contactData;
-      
-      delete newData[item];
-      const index = newInputs.indexOf(item);
-      newInputs.splice(index, 1);
-
-      return { 
-        contactInputs: newInputs,
-        contactData: newData
-      }
-    })
-  }
-
-  addInput(event) {
-    this.toggleValue(false);
-    this.setCollapseTimeout(0);
-    this.setState(prev => {
-      const n = this.currCounter++;
-      const newContactData = prev.contactData;
-      newContactData[n] = '';
-      return {
-        contactInputs: [ n, ...prev.contactInputs ],
-        contactData: newContactData
-      }
-    });
-    setTimeout(() => {
-      this.setCollapseTimeout(300);
-      this.toggleValue(true);
-    }, 100)
-  }
-
-  setCollapseTimeout(value) {
-    this.setState(() => ({collapseTimeout: value}));
-  }
-
-  toggleValue(value) {
-    this.setState(() => { return { open: value } });
-  }
-
-  
-  handleInputChange(event, id) {
+  handleInputChange(event) {
     const value = event.target.value;
+    const index = event.target.name;
     this.setState((prev) => {
       const newContactData = prev.contactData;
-      newContactData[id] = value;
+      newContactData[index].number = value;
       return { contactData: newContactData };
     });
     event.preventDefault();
@@ -83,83 +29,32 @@ class AddContacts extends Component {
     this.props.stateHandler(this.state, this.props.stateName);
   }
 
-  createInput(collapsable, id) {
-    let input = (
-      <TextField
-        id={"phoneNumber" + id}
-        name={"phoneNumber" + id}
-        value={this.state.contactData[id]}
-        onChange={event => this.handleInputChange(event, id)}
-        label="Teléfono"
-        autoComplete="phone"
-        type="tel"
-        InputProps={{
-          startAdornment: <InputAdornment position="start">#</InputAdornment>,
-        }}
-        fullWidth
-      />
-    )
-
-    let wrapper;
-
-    if(collapsable) {
-      wrapper = (<Collapse
-                  timeout={this.state.collapseTimeout}
-                  in={this.state.open}
-                >
-                  {input}
-                </Collapse>)
-    } else {
-      wrapper = input;
-    }
-
-    // TODO: add a wrapper collapse to the button
-    return (
-      <Grid container>
-        <Grid item xs={8}>
-          {wrapper}
-        </Grid>
-        <Grid item xs={4}>
-          <div style={{marginTop: 13}} />
-          <Button
-            color="secondary"
-            startIcon={<DeleteIcon fontSize="large"/>}
-            onClick={() => this.deleteInput(id)}
-          />
-        </Grid>
-      </Grid>
-    )
-  }
-
   render() {
-    const inputsQtty = this.state.contactInputs.length;
-    const inputs = this.state.contactInputs.map((i, index) => {
-      let input;
-      if (index == inputsQtty - 1) {
-        input = this.createInput(true, i)
-      } else {
-        input = this.createInput(false, i);
-      }
-      return (
-        <Fragment key={i}>
-          {input}
-        </Fragment>
+    let inputs = [];
+    this.state.contactData.map((contact, index) => {
+      inputs.push(
+        <Grid item xs={12}>
+          <TextField
+            id={index}
+            name={index}
+            value={contact.number}
+            onChange={this.handleInputChange}
+            label="Teléfono"
+            autoComplete="phone"
+            type="tel"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">#</InputAdornment>,
+            }}
+          />
+      </Grid>
       )
     })
+
     return (
       <Grid container>
             {/* TODO: */}
             {/* https://material-ui.com/components/text-fields/#integration-with-3rd-party-input-libraries */}
-            {inputs}
-            <Grid item xs={12}>
-              <Button
-                color="primary"
-                onClick={this.addInput}
-                startIcon={<AddIcon />}
-              >
-                Agregar
-              </Button>
-            </Grid>
+        {inputs}
       </Grid>
     );
   }
