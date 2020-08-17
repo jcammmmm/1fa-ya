@@ -14,27 +14,31 @@ class AddImages extends Component {
     this.onImageChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getPreviewUrl = this.getPreviewUrl.bind(this);
     this.hiddenFileInput = React.createRef();
   }
 
   handleChange(event) {
     event.preventDefault();
+    let photo = event.target.files[0];
 
-    let reader = new FileReader();
-    let file = event.target.files[0];
+    // TODO: https://stackoverflow.com/questions/58924617/componentwillreceiveprops-has-been-renamed
+    this.getPreviewUrl(photo).then(previewUrl => {
+      this.setState(prev => prev.photos.push({ "url": previewUrl }))
+    }); 
+  }
 
-    reader.onloadend = () => {
-      this.setState((prev) => {
-        let newImages = prev.images;
-        newImages.push( {
-          file: file,
-          previewUrl: reader.result
-        });
-        return { images: newImages }
-      });
-    }
-
-    reader.readAsDataURL(file)
+  getPreviewUrl(photoFile) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      }
+      reader.onerror = (e) => {
+        reject(e);
+      }
+      reader.readAsDataURL(photoFile);
+    })
   }
 
   handleClick(event) {
@@ -49,14 +53,14 @@ class AddImages extends Component {
   render() { 
     return (
     <Fragment>
-      {this.state.images.length != 0 && <CarouselUploadedImages images={this.state.images} />}
+      {this.state.photos.length != 0 && <CarouselUploadedImages photos={this.state.photos} />}
       <Button
         color="secondary"
         onClick={this.handleClick}        
         startIcon={<CloudUploadIcon />}
       >
         Seleccionar
-      </Button>
+      </Button> 
       <input type="file" 
              onChange={this.handleChange} 
              style={{display:"none"}}

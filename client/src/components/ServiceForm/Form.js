@@ -51,7 +51,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 1,
+      activeStep: 3,
       myHouse: {},
       detailsState: { 
         serviceName: "",
@@ -61,7 +61,10 @@ class Form extends Component {
         tradeable: false
       },
       contactsState: {
-        contactData: [ {"number": ""}, {"number": ""}, {"number": ""}]
+        contactData: [ 
+          {"number": ""}, 
+          {"number": ""}, 
+          {"number": ""}]
       },
       socialState: {
         contactInputs: [],    
@@ -70,7 +73,7 @@ class Form extends Component {
         contactData: { },
       }, 
       imagesState: {
-        images: [ ]
+        photos: [ ]
       },
       tagsState: {
         tags: [],

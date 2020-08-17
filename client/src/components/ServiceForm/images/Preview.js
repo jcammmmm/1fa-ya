@@ -34,11 +34,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Preview(props) {
-  const tutorialSteps = props.images;
+  console.log(props);
+  const loadedImages = props.photos;
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const maxSteps = loadedImages.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -55,7 +56,7 @@ function Preview(props) {
   return (
     <div className={classes.root}>      
       <Paper square elevation={0} className={classes.header}>
-        <Typography>:)</Typography>
+        <Typography></Typography>
       </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -63,10 +64,10 @@ function Preview(props) {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.previewUrl}>
+        {loadedImages.map((photo, index) => (
+          <div key={photo.url}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.previewUrl} />
+              <img className={classes.img} src={photo.url} />
             ) : null}
           </div>
         ))}
