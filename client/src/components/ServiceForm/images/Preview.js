@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Preview(props) {
-  console.log(props);
   const loadedImages = props.photos;
   const classes = useStyles();
   const theme = useTheme();

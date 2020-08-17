@@ -87,6 +87,9 @@ class Form extends Component {
     this.craftServiceData = this.craftServiceData.bind(this);
     this.sparceArrayToList = this.sparceArrayToList.bind(this);
     this.getSampleState = this.getSampleState.bind(this);
+    this.dataURItoBlob = this.dataURItoBlob.bind(this);
+    this.uploadPhotos = this.uploadPhotos.bind(this);
+    this.postService = this.postService.bind(this);
 
     // this.state = this.getSampleState();
   }
@@ -130,6 +133,40 @@ class Form extends Component {
           .catch(e => console.log(e));
   }
 
+  postService() {
+    this.uploadPhotos(this.state.imagesState.photos);
+
+  }
+
+  uploadPhotos(photos) {
+    var photo = this.dataURItoBlob(photos[0].url, 'image/png');
+
+    const formData = new FormData();
+    const url = 'http://localhost:8000/upload-image'
+    formData.append('image', photo, 'buahahahah.png');
+    const config = {
+      headers: {
+          'content-type': 'multipart/form-data'
+      }
+    }
+    Axios.post(url, formData, config);
+
+
+
+    console.log(photo);
+  }
+
+  dataURItoBlob(dataURI, type) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    var bb = new Blob([ab], { type: type });
+    return bb;
+  }
+
   getStepContent(step) {
     switch (step) {
       case 0:
@@ -144,7 +181,6 @@ class Form extends Component {
         return <AddTags stateHandler={this.transferState} stateName={"tagsState"} parentState={this.state.tagsState} />
       case 5:
         let serviceData = this.craftServiceData(this.state);
-        console.log(this.state);
         return <ShowOverview parentState={serviceData} />
       default:
         throw new Error('Unknown step')
@@ -517,12 +553,20 @@ class Form extends Component {
                     >
                       Atrás
                     </Button>
-                    <Button
-                      color="primary"
-                      onClick={this.handleNext}
-                    >
-                      {this.state.activeStep === steps.length - 1 ? 'Me gusta' : 'Siguiente'}
-                    </Button>
+                      {this.state.activeStep === steps.length - 1 ?
+                        <Button
+                          color="primary"
+                          onClick={() => {this.postService(); this.handleNext();}}
+                        >
+                          Me gusta
+                        </Button>
+                      :
+                        <Button
+                          color="primary"
+                          onClick={this.handleNext}
+                        >
+                          Siguiente
+                        </Button>}
                   </div>
                 </StepContent>
               </Step>
