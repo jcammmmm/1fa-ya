@@ -139,17 +139,21 @@ class Form extends Component {
   }
 
   uploadPhotos(photos) {
-    var photo = this.dataURItoBlob(photos[0].url, 'image/png');
-
     const formData = new FormData();
-    const url = 'http://localhost:8000/upload-image'
-    formData.append('image', photo, 'buahahahah.png');
+    
+    for(let i in photos) {
+      var photo = this.dataURItoBlob(photos[i].url, 'image/png');
+      formData.append('photos', photo, (Math.random() + '').split('.')[1] + '.png');
+    }
+    formData.append('folder', (Math.random() + '').split('.')[1]);
+    
+    const url = 'http://localhost:8000/upload-photos'
     const config = {
       headers: {
           'content-type': 'multipart/form-data'
       }
     }
-    Axios.post(url, formData, config);
+    Axios.post(url, formData, config).then(r => console.log(r));
 
 
 
@@ -556,7 +560,7 @@ class Form extends Component {
                       {this.state.activeStep === steps.length - 1 ?
                         <Button
                           color="primary"
-                          onClick={() => {this.postService(); this.handleNext();}}
+                          onClick={() => {this.postService();}} // this.handleNext();}}
                         >
                           Me gusta
                         </Button>

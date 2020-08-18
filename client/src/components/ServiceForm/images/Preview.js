@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { autoPlay } from 'react-swipeable-views-utils';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -30,10 +31,19 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 400,
     display: 'block',
     overflow: 'hidden',
+  },
+  container: {
+    position: 'relative'
+  },
+  delButton: {
+    position: 'absolute',
+    bottom: '5%',
+    right: '0%'
   }
 }));
 
 function Preview(props) {
+  console.log(props);
   const loadedImages = props.photos;
   const classes = useStyles();
   const theme = useTheme();
@@ -53,23 +63,31 @@ function Preview(props) {
   };
 
   return (
-    <div className={classes.root}>      
-      <Paper square elevation={0} className={classes.header}>
-        <Typography></Typography>
-      </Paper>
+    <div className={classes.root}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {loadedImages.map((photo, index) => (
-          <div key={photo.url}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={photo.url} />
-            ) : null}
-          </div>
-        ))}
+          {loadedImages.map((photo, index) => (
+            <div key={photo.url}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <div className={classes.container}>
+                  <Button
+                    color="secondary"
+                    startIcon={<DeleteIcon fontSize="large"/>}
+                    onClick={() => props.removeHandler(index)}
+                    className={classes.delButton}
+                  />
+                  <img 
+                    className={classes.img} 
+                    src={photo.url}
+                  />
+                </div>
+              ) : null}
+            </div>
+          ))}
       </AutoPlaySwipeableViews>
       <MobileStepper
         steps={maxSteps}

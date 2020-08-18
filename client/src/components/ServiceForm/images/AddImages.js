@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import CarouselUploadedImages from './Preview'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
+
 class AddImages extends Component {
 
   constructor(props) {
@@ -15,6 +16,7 @@ class AddImages extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getPreviewUrl = this.getPreviewUrl.bind(this);
+    this.removePhoto = this.removePhoto.bind(this);
     this.hiddenFileInput = React.createRef();
   }
 
@@ -23,9 +25,14 @@ class AddImages extends Component {
     let photo = event.target.files[0];
 
     // TODO: https://stackoverflow.com/questions/58924617/componentwillreceiveprops-has-been-renamed
+    // TODO: addFirst instead push
     this.getPreviewUrl(photo).then(previewUrl => {
       this.setState(prev => prev.photos.push({ "url": previewUrl }))
     }); 
+  }
+
+  removePhoto(id) {
+    this.setState(prev => prev.photos.splice(id, 1));
   }
 
   getPreviewUrl(photoFile) {
@@ -53,7 +60,7 @@ class AddImages extends Component {
   render() { 
     return (
     <Fragment>
-      {this.state.photos.length != 0 && <CarouselUploadedImages photos={this.state.photos} />}
+      {this.state.photos.length != 0 && <CarouselUploadedImages photos={this.state.photos} removeHandler={this.removePhoto}/>}
       <Button
         color="secondary"
         onClick={this.handleClick}        

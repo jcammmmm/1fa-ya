@@ -22,6 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 //start app 
 const port = process.env.PORT || 8000;
 app.listen(port, () => 
@@ -37,19 +42,20 @@ app.post('/upload-image', async (req, res) => {
           });
       } else {
           //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-          let avatar = req.files.image;
+          let photo = req.files.image;
+          let folder = req.body.folder;
           
           //Use the mv() method to place the file in upload directory (i.e. "uploads")
-          avatar.mv('./uploads/' + avatar.name);
+          photo.mv('./uploads/' + folder + "/" + photo.name);
 
           //send response
           res.send({
               status: true,
-              message: 'File is uploaded',
+              message: 'File was uploaded',
               data: {
-                  name: avatar.name,
-                  mimetype: avatar.mimetype,
-                  size: avatar.size
+                  name: photo.name,
+                  mimetype: photo.mimetype,
+                  size: photo.size
               }
           });
       }
@@ -67,19 +73,21 @@ app.post('/upload-photos', async (req, res) => {
           });
       } else {
           let data = []; 
+          let folder = './uploads/' + req.body.folder + '/';
   
           //loop all files
           _.forEach(_.keysIn(req.files.photos), (key) => {
               let photo = req.files.photos[key];
-              
+              let location = folder + photo.name;
               //move photo to uploads directory
-              photo.mv('./uploads/' + photo.name);
+              photo.mv(location);
 
               //push file details
               data.push({
                   name: photo.name,
                   mimetype: photo.mimetype,
-                  size: photo.size
+                  size: photo.size,
+                  url: location
               });
           });
   
