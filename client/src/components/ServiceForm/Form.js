@@ -11,6 +11,8 @@ import AddTags from './tags/AddTags';
 
 import Axios from 'axios';
 
+const MEDIA_HOST = 'http://localhost:8000'
+
 // TODO: Create a post showing how to remove connectors to material ui vertical stepper
 const styles = theme => ({
   paper: {
@@ -147,17 +149,28 @@ class Form extends Component {
     }
     formData.append('folder', (Math.random() + '').split('.')[1]);
     
-    const url = 'http://localhost:8000/upload-photos'
+    const url = MEDIA_HOST + '/upload-photos'
     const config = {
       headers: {
           'content-type': 'multipart/form-data'
       }
     }
-    Axios.post(url, formData, config).then(r => console.log(r));
-
-
-
-    console.log(photo);
+    Axios.post(url, formData, config)
+      .then(r => {
+        let uploadedPhotosUrl = [];
+        r.data.forEach(element => {
+          uploadedPhotosUrl.push({
+            url: MEDIA_HOST + element.url
+          })
+        });
+        console.log(uploadedPhotosUrl);
+        this.setState({
+          imagesState: {
+            photos: uploadedPhotosUrl
+          }
+        });
+      }
+    );
   }
 
   dataURItoBlob(dataURI, type) {

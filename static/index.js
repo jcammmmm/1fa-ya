@@ -74,10 +74,14 @@ app.post('/upload-photos', async (req, res) => {
       } else {
           let data = []; 
           let folder = './uploads/' + req.body.folder + '/';
-  
+
+          photos = req.files.photos;
+          if (!Array.isArray(photos))
+            photos = [photos]
+          
           //loop all files
-          _.forEach(_.keysIn(req.files.photos), (key) => {
-              let photo = req.files.photos[key];
+          _.forEach(_.keysIn(photos), (key) => {
+              let photo = photos[key];
               let location = folder + photo.name;
               //move photo to uploads directory
               photo.mv(location);
@@ -87,16 +91,12 @@ app.post('/upload-photos', async (req, res) => {
                   name: photo.name,
                   mimetype: photo.mimetype,
                   size: photo.size,
-                  url: location
+                  url: location.substring(1) // TODO do this more efficiently...
               });
           });
   
           //return response
-          res.send({
-              status: true,
-              message: 'Files are uploaded',
-              data: data
-          });
+          res.send(data);
       }
   } catch (err) {
       res.status(500).send(err);
