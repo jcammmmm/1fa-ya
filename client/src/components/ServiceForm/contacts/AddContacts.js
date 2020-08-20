@@ -10,13 +10,25 @@ import React, { Component, Fragment } from "react";
 class AddContacts extends Component {
   constructor(props) {
     super(props);
-    this.state = this.props.parentState;
+    if (props.parentState.length == 0) {
+      this.state = {
+        contactData: [
+          {number: ""},
+          {number: ""},
+          {number: ""}
+        ]
+      }
+    } else {
+      this.state = {
+        contactData: props.parentState
+      }
+    }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange(event) {
     const value = event.target.value;
-    const index = event.target.name;
+    const index = event.target.name + "";
     this.setState((prev) => {
       const newContactData = prev.contactData;
       newContactData[index].number = value;
@@ -33,10 +45,9 @@ class AddContacts extends Component {
     let inputs = [];
     this.state.contactData.map((contact, index) => {
       inputs.push(
-        <Grid item xs={12}>
+        <Grid key={index} item xs={12}>
           <TextField
-            id={index}
-            name={index}
+            name={index + ""}
             value={contact.number}
             onChange={this.handleInputChange}
             label="Teléfono"

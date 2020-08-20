@@ -53,7 +53,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 3,
+      activeStep: 1,
       myHouse: {
         address: "Cr 81 B # 56 A 65"
       },
@@ -64,18 +64,16 @@ class Form extends Component {
         showPrice: true,
         tradeable: true
       },
-      contactsState: {  // TODO Rewrite this component and left this array empty
-        contactData: [ 
-          {"number": "328399300"}, 
-          {"number": "329939939"}, 
-          {"number": "9119388"}]
-      },
-      socialState: {  // TODO Rewrite this component
-        contactInputs: [],
-        open: false,
-        collapseTimeout: 500, 
-        contactData: { },
-      }, 
+      contactsState: [
+        {number: 3828299393},
+        {number: 3828299393},
+        {number: 3828299393}
+      ],
+      socialState: [
+        {url: "www.facebook.com/myservice"},
+        {url: "www.instragram.com/myservice"},
+        {url: "www.twitter.com/myservice"},
+      ], 
       imagesState: {
         photos: [ 
           {"url": "http://lorempixel.com/640/480/business"},
