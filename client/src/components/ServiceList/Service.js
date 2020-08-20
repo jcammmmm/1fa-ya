@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PhotoPreview from '../ServiceForm/images/Preview'
 
 const tempImg = "http://192.168.1.15:8000/images/fastfood/2.jpg";
 
@@ -23,10 +24,10 @@ const styles = theme => ({
     maxWidth: 345,
     minWidth: 345
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
+  // media: {
+  //   height: 0,
+  //   paddingTop: '56.25%', // 16:9
+  // },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -78,12 +79,8 @@ class ServiceDetails extends Component {
           title={svc.name}
           subheader={svc.house.address}
         />
-        <CardMedia
-          className={classes.media}
-          image={tempImg}
-          title="Fast Food :Q.........."
-        />
         <CardContent>
+          <PhotoPreview photos={[{ url: tempImg}, { url: "http://localhost:8000/images/fastfood/1.png"} ]}/>
           <Typography variant="body2" color="textSecondary" component="p">
             {svc.description}
           </Typography>

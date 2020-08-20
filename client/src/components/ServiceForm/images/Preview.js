@@ -74,12 +74,12 @@ function Preview(props) {
             <div key={photo.url}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <div className={classes.container}>
-                  <Button
+                  {props.removeHandler !== undefined && <Button
                     color="secondary"
                     startIcon={<DeleteIcon fontSize="large"/>}
                     onClick={() => props.removeHandler(index)}
                     className={classes.delButton}
-                  />
+                  />}
                   <img 
                     className={classes.img} 
                     src={photo.url}

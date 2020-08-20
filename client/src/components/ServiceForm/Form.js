@@ -174,6 +174,8 @@ class Form extends Component {
   }
 
   dataURItoBlob(dataURI, type) {
+    // TODO only execute below code if url is base64 encoded....
+
     var byteString = atob(dataURI.split(',')[1]);
     var ab = new ArrayBuffer(byteString.length);
     var ia = new Uint8Array(ab);
