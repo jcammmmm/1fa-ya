@@ -80,7 +80,7 @@ class ServiceDetails extends Component {
           subheader={svc.house.address}
         />
         <CardContent>
-          <PhotoPreview photos={[{ url: tempImg}, { url: "http://localhost:8000/images/fastfood/1.png"} ]}/>
+          <PhotoPreview photos={svc.photos}/>
           <Typography variant="body2" color="textSecondary" component="p">
             {svc.description}
           </Typography>

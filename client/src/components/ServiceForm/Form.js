@@ -54,32 +54,38 @@ class Form extends Component {
     super(props);
     this.state = {
       activeStep: 3,
-      myHouse: {},
+      myHouse: {
+        address: "Cr 81 B # 56 A 65"
+      },
       detailsState: { 
-        serviceName: "",
-        serviceDetails: "",
-        servicePrice: "",
-        showPrice: false,
-        tradeable: false
+        serviceName: "Fabricación de Calzado de alta costura",
+        serviceDetails: "Se fabrica calzado de alta costura. Técnicas Italianas. Máxima ergonomía.",
+        servicePrice: "54000",
+        showPrice: true,
+        tradeable: true
       },
-      contactsState: {
+      contactsState: {  // TODO Rewrite this component and left this array empty
         contactData: [ 
-          {"number": ""}, 
-          {"number": ""}, 
-          {"number": ""}]
+          {"number": "328399300"}, 
+          {"number": "329939939"}, 
+          {"number": "9119388"}]
       },
-      socialState: {
-        contactInputs: [],    
-        open: false,          
+      socialState: {  // TODO Rewrite this component
+        contactInputs: [],
+        open: false,
         collapseTimeout: 500, 
         contactData: { },
       }, 
       imagesState: {
-        photos: [ ]
+        photos: [ 
+          {"url": "http://lorempixel.com/640/480/business"},
+          {"url": "http://lorempixel.com/640/480/city"},
+          {"url": "http://lorempixel.com/640/480/abstract"}
+        ]
       },
       tagsState: {
         tags: [],
-        selected: [ ]          // Tags selected throught the form
+        selected: ["Calzado", "Restauración", "Carnicería"]          // Tags selected throught the form
       }
     }
     this.handleNext = this.handleNext.bind(this);
@@ -114,7 +120,7 @@ class Form extends Component {
 
   componentDidMount() {
     let config = { headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTk3MTg0MDQzLCJpYXQiOjE1OTY1NzkyNDN9.BhqSBh-UrGzMNzPoYj9RzuEioomq8GPJ3_YCxakwOPE'} };
-    Axios.get('http://192.168.1.15:8080/services/tags', config)
+    Axios.get('http://192.168.1.15:8080/tags', config)
           .then(r => {
             console.log(r);
             this.setState(() => ({
@@ -199,7 +205,7 @@ class Form extends Component {
       case 4: 
         return <AddTags stateHandler={this.transferState} stateName={"tagsState"} parentState={this.state.tagsState} />
       case 5:
-        let serviceData = this.craftServiceData(this.state);
+        let serviceData = this.craftServiceData();
         return <ShowOverview parentState={serviceData} />
       default:
         throw new Error('Unknown step')
@@ -207,18 +213,19 @@ class Form extends Component {
   }
 
   craftServiceData() {
-    return {
-      "name": this.state.detailsState.serviceName,
-      "description": this.state.detailsState.serviceDetails,
-      "price": this.state.detailsState.servicePrice,
+    let service = {
+      "name":         this.state.detailsState.serviceName,
+      "description":  this.state.detailsState.serviceDetails,
+      "price":        this.state.detailsState.servicePrice,
       "publishPrice": this.state.detailsState.showPrice,
-      "house": this.state.myHouse,
-      "tags": this.state.tagsState.selected,
-      "photos": this.state.imagesState.images,
-      "cellphones": this.sparceArrayToList(this.state.contactsState.contactData),
-      "webUris": this.sparceArrayToList(this.state.socialState.contactData),
-
+      "house":        this.state.myHouse,
+      "tags":         this.state.tagsState.selected,
+      "photos":       this.state.imagesState.photos,
+      "cellphones":   this.sparceArrayToList(this.state.contactsState.contactData),
+      "webUris":      this.sparceArrayToList(this.state.socialState.contactData),
     }
+
+    return service;
   }
 
   sparceArrayToList(contactData) {
@@ -575,7 +582,7 @@ class Form extends Component {
                       {this.state.activeStep === steps.length - 1 ?
                         <Button
                           color="primary"
-                          onClick={() => {this.postService();}} // this.handleNext();}}
+                          onClick={() => {this.postService(); this.handleNext();}}
                         >
                           Me gusta
                         </Button>
