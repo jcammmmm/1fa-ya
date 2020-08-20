@@ -36,6 +36,8 @@ public class ServiceService {
 
   
   public Service create(Service service) {
+    // TODO
+    // Enable this, taking the house from auth context
     Long houseId = 3L; // getCurrentContext().getAuthentication().getPersonal().getHouse().getHouseId();
     // Optional<House> result = houseRepository.findById(houseId);
     // House house = result.get();
