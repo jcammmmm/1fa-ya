@@ -38,7 +38,7 @@ class AddContacts extends Component {
   }
 
   componentWillUnmount() {
-    this.props.stateHandler(this.state, this.props.stateName);
+    this.props.stateHandler(this.state.contactData, this.props.stateName);
   }
 
   render() {

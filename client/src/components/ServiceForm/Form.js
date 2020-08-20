@@ -53,7 +53,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 1,
+      activeStep: 4,
       myHouse: {
         address: "Cr 81 B # 56 A 65"
       },
@@ -76,14 +76,18 @@ class Form extends Component {
       ], 
       imagesState: {
         photos: [ 
-          {"url": "http://lorempixel.com/640/480/business"},
-          {"url": "http://lorempixel.com/640/480/city"},
-          {"url": "http://lorempixel.com/640/480/abstract"}
+          {url: "http://lorempixel.com/640/480/business"},
+          {url: "http://lorempixel.com/640/480/city"},
+          {url: "http://lorempixel.com/640/480/abstract"}
         ]
       },
       tagsState: {
         tags: [],
-        selected: ["Calzado", "Restauración", "Carnicería"]          // Tags selected throught the form
+        selected: [
+          {id: 4, name: "Fabricación Calzado"},
+          {id: 3, name: "Restauración Calzado"},
+          {id: 3, name: "Lavado Carros"}
+        ]          // Tags selected throught the form
       }
     }
     this.handleNext = this.handleNext.bind(this);
@@ -91,13 +95,9 @@ class Form extends Component {
     this.transferState = this.transferState.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
     this.craftServiceData = this.craftServiceData.bind(this);
-    this.sparceArrayToList = this.sparceArrayToList.bind(this);
-    this.getSampleState = this.getSampleState.bind(this);
     this.dataURItoBlob = this.dataURItoBlob.bind(this);
     this.uploadPhotos = this.uploadPhotos.bind(this);
     this.postService = this.postService.bind(this);
-
-    // this.state = this.getSampleState();
   }
 
   handleNext() {
@@ -120,7 +120,6 @@ class Form extends Component {
     let config = { headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTk3MTg0MDQzLCJpYXQiOjE1OTY1NzkyNDN9.BhqSBh-UrGzMNzPoYj9RzuEioomq8GPJ3_YCxakwOPE'} };
     Axios.get('http://192.168.1.15:8080/tags', config)
           .then(r => {
-            console.log(r);
             this.setState(() => ({
               tagsState: {
                 tags: r.data
@@ -131,7 +130,6 @@ class Form extends Component {
 
     Axios.get('http://192.168.1.15:8080/houses/my', config)
             .then(r => {
-              console.log(r);
               this.setState(() => ({
                 myHouse: r.data
               }))
@@ -219,332 +217,11 @@ class Form extends Component {
       "house":        this.state.myHouse,
       "tags":         this.state.tagsState.selected,
       "photos":       this.state.imagesState.photos,
-      "cellphones":   this.sparceArrayToList(this.state.contactsState.contactData),
-      "webUris":      this.sparceArrayToList(this.state.socialState.contactData),
+      "cellphones":   this.state.contactsState,
+      "webUris":      this.state.socialState
     }
 
     return service;
-  }
-
-  sparceArrayToList(contactData) {
-    let dataList = [];
-    for(let i in contactData) {
-      dataList.push(contactData[i])
-    }
-    return dataList;
-  }
-
-  getSampleState() {
-    return {
-      "activeStep": 1,
-      "myHouse": {
-        "id": 1,
-        "name": "Vi.",
-        "mainPhoto": "proto://cnd.uri/700",
-        "location": "proto://map.uri/135",
-        "address": "Cll 43 # 44 - 9"
-      },
-      "detailsState": {
-        "serviceName": "Restauración de Calzado profesional",
-        "serviceDetails": "Restauramos calzado de cualquier tipo especialmente artículos de cuero",
-        "servicePrice": "34000",
-        "showPrice": true,
-        "tradeable": true
-      },
-      "contactsState": {
-        "contactInputs": [
-          3,
-          2,
-          1,
-          0
-        ],
-        "open": true,
-        "collapseTimeout": 300,
-        "contactData": {
-          "0": "321789903",
-          "1": "321789902",
-          "2": "321789901",
-          "3": "321789904"
-        }
-      },
-      "socialState": {
-        "contactInputs": [
-          1,
-          0
-        ],
-        "open": true,
-        "collapseTimeout": 300,
-        "contactData": {
-          "0": "facebook.com/buahahah",
-          "1": "instagram.com/buahahah",
-          "2": "instagram.com/buahahaha"
-        }
-      },
-      "imagesState": {
-        "images": [
-          "http://imagehosting.net/image1",
-          "http://imagehosting.net/image2"
-        ]
-      },
-      "tagsState": {
-        "selected": [
-          {
-            "id": 1,
-            "name": "Restauración Calzado"
-          },
-          {
-            "id": 4,
-            "name": "Paseo Perros"
-          },
-          {
-            "id": 3,
-            "name": "Calzado a la Medida"
-          }
-        ],
-        "tags": [
-          {
-            "id": 1,
-            "name": "Restauración Calzado"
-          },
-          {
-            "id": 2,
-            "name": "Fabricación Calzado"
-          },
-          {
-            "id": 3,
-            "name": "Calzado a la Medida"
-          },
-          {
-            "id": 4,
-            "name": "Paseo Perros"
-          },
-          {
-            "id": 5,
-            "name": "Ropa a la Medida"
-          },
-          {
-            "id": 6,
-            "name": "Domicilios"
-          },
-          {
-            "id": 7,
-            "name": "Mandado"
-          },
-          {
-            "id": 8,
-            "name": "Voy haciendo fila"
-          },
-          {
-            "id": 9,
-            "name": "Corresponsal Mammi"
-          },
-          {
-            "id": 10,
-            "name": "Software a la Medida"
-          },
-          {
-            "id": 11,
-            "name": "Arreglos Modistería"
-          },
-          {
-            "id": 12,
-            "name": "Arreglos Computadores"
-          },
-          {
-            "id": 13,
-            "name": "Arreglos Electrodomésticos"
-          },
-          {
-            "id": 14,
-            "name": "Arreglos Mecánica"
-          },
-          {
-            "id": 15,
-            "name": "Almuerzos"
-          },
-          {
-            "id": 16,
-            "name": "Almuerzos Caseros"
-          },
-          {
-            "id": 17,
-            "name": "Cocinar platos demás"
-          },
-          {
-            "id": 18,
-            "name": "Cuidar Niños"
-          },
-          {
-            "id": 19,
-            "name": "Carnicería"
-          },
-          {
-            "id": 20,
-            "name": "Asesorías Metemáticas"
-          },
-          {
-            "id": 21,
-            "name": "Asesorías Física"
-          },
-          {
-            "id": 22,
-            "name": "Asesorías Química"
-          },
-          {
-            "id": 23,
-            "name": "Asesorías Académicas"
-          },
-          {
-            "id": 24,
-            "name": "Lavado Carros"
-          },
-          {
-            "id": 25,
-            "name": "Conductor Taxi"
-          },
-          {
-            "id": 26,
-            "name": "Conductor Plataforma"
-          },
-          {
-            "id": 27,
-            "name": "Yoga"
-          },
-          {
-            "id": 28,
-            "name": "Panadería"
-          },
-          {
-            "id": 29,
-            "name": "Arreglo Bicicletas"
-          },
-          {
-            "id": 30,
-            "name": "Aseo Casas"
-          },
-          {
-            "id": 31,
-            "name": "Pintura Casas"
-          },
-          {
-            "id": 32,
-            "name": "Fruver"
-          },
-          {
-            "id": 33,
-            "name": "Arepas"
-          },
-          {
-            "id": 34,
-            "name": "Arepas y Chorizos"
-          },
-          {
-            "id": 35,
-            "name": "Comidas Rápidas"
-          },
-          {
-            "id": 36,
-            "name": "Mango Biches"
-          },
-          {
-            "id": 37,
-            "name": "Helados"
-          },
-          {
-            "id": 38,
-            "name": "Fotocopias"
-          },
-          {
-            "id": 39,
-            "name": "Servicio de abogado"
-          },
-          {
-            "id": 40,
-            "name": "Ayuda Espiritual"
-          },
-          {
-            "id": 41,
-            "name": "Alquilo Carro"
-          },
-          {
-            "id": 42,
-            "name": "Alquilo Moto"
-          },
-          {
-            "id": 43,
-            "name": "Asesoría Inglés"
-          },
-          {
-            "id": 44,
-            "name": "Arreglos Eléctricos"
-          },
-          {
-            "id": 45,
-            "name": "Instalaciones Eléctricas"
-          },
-          {
-            "id": 46,
-            "name": "Ferretería"
-          },
-          {
-            "id": 47,
-            "name": "Pañalera y Bebes"
-          },
-          {
-            "id": 48,
-            "name": "Salsamentaria"
-          },
-          {
-            "id": 49,
-            "name": "Pollería"
-          },
-          {
-            "id": 50,
-            "name": "Pollos Asados"
-          },
-          {
-            "id": 51,
-            "name": "Bar"
-          },
-          {
-            "id": 52,
-            "name": "Rock"
-          },
-          {
-            "id": 53,
-            "name": "Salsa"
-          },
-          {
-            "id": 54,
-            "name": "Regge"
-          },
-          {
-            "id": 55,
-            "name": "Sala de Ensayos"
-          },
-          {
-            "id": 56,
-            "name": "Instructor Guitarra"
-          },
-          {
-            "id": 57,
-            "name": "Instructor Piano"
-          },
-          {
-            "id": 58,
-            "name": "Instructor Violín"
-          },
-          {
-            "id": 59,
-            "name": "Ornamentación"
-          },
-          {
-            "id": 60,
-            "name": "Acarreos"
-          }
-        ]
-      }
-    }
   }
 
   render() {

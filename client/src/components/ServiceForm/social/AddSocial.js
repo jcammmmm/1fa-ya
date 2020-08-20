@@ -34,7 +34,7 @@ class AddSocial extends Component {
   }
 
   componentWillUnmount() {
-    this.props.stateHandler(this.state, this.props.stateName);
+    this.props.stateHandler(this.state.socialData, this.props.stateName);
   }
 
   render() {

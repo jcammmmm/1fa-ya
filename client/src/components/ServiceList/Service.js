@@ -71,11 +71,13 @@ class ServiceDetails extends Component {
               {svc.name.charAt(0).toUpperCase()}
             </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // TODO: Implement the following:
+          // - Send my contact for further bussiness
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title={svc.name}
           subheader={svc.house.address}
         />
@@ -86,9 +88,10 @@ class ServiceDetails extends Component {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          {/* TODO: Implement the many to many relationship for this favorite button */}
+          {/* <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
